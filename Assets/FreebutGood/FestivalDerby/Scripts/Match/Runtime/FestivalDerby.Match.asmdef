@@ -3,9 +3,12 @@
     "rootNamespace": "FestivalDerby.Match",
     "references": [
         "FestivalDerby.Match.Core",
+        "FestivalDerby.Bots",
+        "FestivalDerby.Driving.Rules",
         "FestivalDerby.Driving.Runtime",
         "FestivalDerby.World",
-        "FestivalDerby.World.Core"
+        "FestivalDerby.World.Core",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

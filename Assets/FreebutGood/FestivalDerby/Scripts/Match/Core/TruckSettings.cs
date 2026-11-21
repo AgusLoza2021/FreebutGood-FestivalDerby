@@ -51,6 +51,13 @@ namespace FestivalDerby.Match
             get { return new TruckSettings(11f, 0f, 6f, 2.4f, 0.75f, 0.35f, -2.25f, 5f, 3f); }
         }
 
+        /// <summary>The same truck driving at a different speed.</summary>
+        public TruckSettings WithSpeed(float speed)
+        {
+            return new TruckSettings(speed, StartDistance, BedLength, BedWidth, BedHeight, BedHeightTolerance,
+                BedCenterOffset, RampLength, MaxRelativeSpeed);
+        }
+
         /// <summary>The same truck holding a different start distance, e.g. ahead of this run's grid.</summary>
         public TruckSettings WithStartDistance(float startDistance)
         {

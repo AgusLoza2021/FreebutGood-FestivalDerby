@@ -192,6 +192,17 @@ namespace FestivalDerby.Match.Tests
         }
 
         [Test]
+        public void WithSpeed_ChangesOnlyTheSpeed()
+        {
+            TruckSettings faster = Settings.WithSpeed(15f);
+
+            Assert.That(faster.Speed, Is.EqualTo(15f));
+            Assert.That(faster.StartDistance, Is.EqualTo(Settings.StartDistance));
+            Assert.That(faster.BedLength, Is.EqualTo(Settings.BedLength));
+            Assert.That(faster.IsValid, Is.True);
+        }
+
+        [Test]
         public void DefaultSettings_AreValid_AndADefaultStructIsNot()
         {
             Assert.That(TruckSettings.Default.IsValid, Is.True);
