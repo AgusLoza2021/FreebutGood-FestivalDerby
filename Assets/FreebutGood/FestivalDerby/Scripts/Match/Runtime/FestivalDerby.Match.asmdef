@@ -4,6 +4,7 @@
     "references": [
         "FestivalDerby.Match.Core",
         "FestivalDerby.Bots",
+        "FestivalDerby.Bots.Core",
         "FestivalDerby.Driving.Rules",
         "FestivalDerby.Driving.Runtime",
         "FestivalDerby.World",
