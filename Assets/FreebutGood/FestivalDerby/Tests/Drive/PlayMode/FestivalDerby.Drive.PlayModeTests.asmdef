@@ -3,6 +3,7 @@
     "rootNamespace": "FestivalDerby.Drive.Tests",
     "references": [
         "FestivalDerby.Drive",
+        "FestivalDerby.Bots",
         "FestivalDerby.Driving.Runtime",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"

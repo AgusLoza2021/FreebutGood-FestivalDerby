@@ -1,5 +1,9 @@
+using FestivalDerby.Bots;
 using FestivalDerby.Driving.Runtime;
 using FestivalDerby.Look;
+using FestivalDerby.Match;
+using FestivalDerby.Menu;
+using FestivalDerby.Menu;
 using FestivalDerby.World;
 using UnityEngine;
 
@@ -7,33 +11,38 @@ namespace FestivalDerby.Drive
 {
     /// <summary>
     /// The whole game in one composition root: load the circuit, put the car on the start grid, hand it
-    /// the controls, point the chase camera at it, apply the look and dress the track. Every system it
-    /// wires is plain code in its own module; this class only decides the order.
+    /// the controls, point the chase camera at it, apply the look, dress the track and line up the bots.
     ///
-    /// It builds in <see cref="Start"/> rather than Awake so a test (or a tool) can add the component,
-    /// set what it wants and only then let the first frame build.
+    /// It holds no tuning of its own. Every choice lives on a config object under "Config" in the
+    /// Hierarchy (Car, Controls, Camera, Look, Track, Bots), and the heavy presets those point at are
+    /// ScriptableObject assets. This class only decides the order things are built in.
+    ///
+    /// It builds in <see cref="Start"/> rather than Awake so a test (or a tool) can change a config and
+    /// only then let the first frame build.
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class DriveBootstrap : MonoBehaviour
     {
-        [Tooltip("Car, handling, map, visuals and look. Everything the drive is tuned with lives here.")]
-        [SerializeField] private DrivingFeatureConfig _config;
+        private const int TargetFrameRate = 60;
 
-        [Tooltip("Kerbs, edge lines and trackside props. Empty leaves the circuit bare.")]
-        [SerializeField] private TracksideKit _trackside;
+        [Header("Config objects (children of Config)")]
+        [SerializeField] private CarConfig _carConfig;
+        [SerializeField] private ControlsConfig _controlsConfig;
+        [SerializeField] private CameraConfig _cameraConfig;
+        [SerializeField] private LookConfig _lookConfig;
+        [SerializeField] private TrackConfig _trackConfig;
+        [SerializeField] private BotsConfig _botsConfig;
+        [SerializeField] private MatchConfig _matchConfig;
 
-        [Tooltip("Seed for the trackside props, so the same circuit is always dressed the same way.")]
-        [SerializeField] private uint _tracksideSeed = 7u;
+        [Tooltip("Everything built at runtime (track, cars, camera, touch controls) goes under this object.")]
+        [SerializeField] private Transform _runtime;
 
-        [Tooltip("Build the on-screen stick and pedals. The keyboard works either way.")]
-        [SerializeField] private bool _touchControls = true;
-
-        [SerializeField] private KeyCode _resetKey = KeyCode.R;
-
+        private DrivingFeatureConfig _driving;
         private LoadedMap _map;
         private OwnedGrayboxCircuit _circuit;
         private OwnedCarGeometry _car;
         private Camera _camera;
+        private ControlHeadingFrame _controlFrame;
         private Light _sun;
         private LocalChaseCamera _chase;
         private MobileDriveControls _controls;
@@ -43,34 +52,40 @@ namespace FestivalDerby.Drive
         private TracksideDresser _dresser;
         private PlayerRespawn _respawn;
         private CarGhostMonitor _ghost;
+        private BotField _bots;
+        private TruckChaseSession _truckChase;
+        private LapRaceSession _lapRace;
 
         private bool _brake;
         private bool _reverse;
         private bool _nitro;
 
         public bool Built { get; private set; }
+
+        /// <summary>What the main menu chose for this run; null when Gameplay was opened directly.</summary>
+        public MenuSelection Launch { get; private set; }
+
+        /// <summary>Laps chosen in the menu (0 without one). Nothing counts laps at runtime yet.</summary>
+        public int TargetLaps => Launch != null ? Launch.Laps : 0;
         public LocalCarFixedStepDriver Driver { get; private set; }
         public Rigidbody CarBody => _car != null ? _car.Body : null;
         public Camera Camera => _camera;
         public MobileDriveControls Controls => _controls;
+        public Transform RuntimeRoot => _runtime;
 
-        public DrivingFeatureConfig Config
-        {
-            get { return _config; }
-            set { _config = value; }
-        }
+        /// <summary>AI cars spawned for this run (0 before the build).</summary>
+        public int BotCount => _bots != null ? _bots.Count : 0;
 
-        public TracksideKit Trackside
-        {
-            get { return _trackside; }
-            set { _trackside = value; }
-        }
+        public Rigidbody GetBotBody(int index) => _bots[index].Body;
 
-        public bool TouchControls
-        {
-            get { return _touchControls; }
-            set { _touchControls = value; }
-        }
+        /// <summary>The running truck chase, or null in any other mode.</summary>
+        public TruckChaseSession TruckChase => _truckChase;
+
+        /// <summary>The running lap race, or null in any other mode.</summary>
+        public LapRaceSession LapRace => _lapRace;
+
+        /// <summary>Metres of racing line bot <paramref name="index"/> has covered since the start.</summary>
+        public float GetBotTravelledMeters(int index) => _bots[index].TravelledMeters;
 
         private void Start()
         {
@@ -83,58 +98,107 @@ namespace FestivalDerby.Drive
             if (Built)
                 return;
 
-            if (_config == null)
+            FindMissingConfigs();
+            // Before anything reads a config: a run that came from the main menu carries its choices here.
+            Launch = MenuLaunch.Apply(_carConfig, _trackConfig, _botsConfig);
+            _driving = _carConfig != null ? _carConfig.Driving : null;
+            if (_driving == null)
             {
-                Debug.LogError("[drive] DriveBootstrap has no DrivingFeatureConfig assigned.", this);
+                Debug.LogError("[drive] The Car config has no DrivingFeatureConfig assigned.", this);
                 return;
             }
 
-            var map = _config.Map as MapAsset;
+            MapAsset map = _trackConfig != null ? _trackConfig.Map : null;
             if (map == null)
             {
-                Debug.LogError("[drive] DrivingFeatureConfig.Map must reference a MapAsset.", this);
+                Debug.LogError("[drive] The Track config has no MapAsset assigned.", this);
                 return;
             }
 
             Built = true;
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = TargetFrameRate;
+            EnsureRuntimeRoot();
 
-            LookSettings look = LookProfile.Resolve(_config.Look as LookProfile);
-            CreateSunAndCamera(look);
-            LoadCircuit(map);
+            LookSettings look = LookProfile.Resolve(_lookConfig != null ? _lookConfig.Profile : null);
+            LookSettings framing = _cameraConfig != null && _cameraConfig.Framing != null
+                ? LookProfile.Resolve(_cameraConfig.Framing)
+                : look;
+            int botCount = _botsConfig != null ? _botsConfig.Count : 0;
+
+            CreateSunAndCamera(framing);
+            LoadCircuit(map, BotField.GridSlotsFor(botCount));
             SpawnCar();
             WireControls();
-            WireCamera(look);
+            WireCamera(framing);
             ApplyLook(look);
             DressTrack();
             ArmRespawn();
+            SpawnBots(botCount);
+            StartMatch();
         }
 
-        private void CreateSunAndCamera(in LookSettings look)
+        /// <summary>
+        /// The scene builder wires every reference, but a hand-made scene (or a test) may only have the
+        /// config objects somewhere under this one, so they are looked up before giving up on them.
+        /// </summary>
+        private void FindMissingConfigs()
+        {
+            if (_carConfig == null) _carConfig = GetComponentInChildren<CarConfig>(true);
+            if (_controlsConfig == null) _controlsConfig = GetComponentInChildren<ControlsConfig>(true);
+            if (_cameraConfig == null) _cameraConfig = GetComponentInChildren<CameraConfig>(true);
+            if (_lookConfig == null) _lookConfig = GetComponentInChildren<LookConfig>(true);
+            if (_trackConfig == null) _trackConfig = GetComponentInChildren<TrackConfig>(true);
+            if (_botsConfig == null) _botsConfig = GetComponentInChildren<BotsConfig>(true);
+            if (_matchConfig == null) _matchConfig = GetComponentInChildren<MatchConfig>(true);
+        }
+
+        private void EnsureRuntimeRoot()
+        {
+            if (_runtime != null)
+                return;
+
+            _runtime = new GameObject("Runtime").transform;
+            _runtime.SetParent(transform, false);
+        }
+
+        private void CreateSunAndCamera(in LookSettings framing)
         {
             var sunObject = new GameObject("Sun", typeof(Light));
-            sunObject.transform.SetParent(transform, false);
+            sunObject.transform.SetParent(_runtime, false);
             _sun = sunObject.GetComponent<Light>();
             _sun.type = LightType.Directional;
             _sun.shadows = LightShadows.Soft;
 
             var cameraObject = new GameObject("DriveCamera", typeof(Camera), typeof(AudioListener));
-            cameraObject.transform.SetParent(transform, false);
+            cameraObject.transform.SetParent(_runtime, false);
             _camera = cameraObject.GetComponent<Camera>();
             _camera.clearFlags = CameraClearFlags.SolidColor;
-            _camera.fieldOfView = look.CameraFov;
-            _camera.nearClipPlane = 0.3f;
-            _camera.farClipPlane = 900f;
+            _camera.fieldOfView = framing.CameraFov;
+            _camera.nearClipPlane = _cameraConfig != null ? _cameraConfig.NearClip : 0.3f;
+            _camera.farClipPlane = _cameraConfig != null ? _cameraConfig.FarClip : 900f;
             _chase = cameraObject.AddComponent<LocalChaseCamera>();
+
+            // With drift on, the visible camera lags the car's heading (see WireCamera). The stick is
+            // read against the camera's heading, so it reads this frame instead: the look's own
+            // smoothing, and a held direction steers exactly as it did before drift.
+            if (framing.YawMode == CameraYawMode.FollowCar && CarBodyJuice.ResolveDriftSettings(_driving).Enabled)
+            {
+                _controlFrame = new GameObject("ControlFrame").AddComponent<ControlHeadingFrame>();
+                _controlFrame.transform.SetParent(_runtime, false);
+            }
         }
+
+        /// <summary>What the stick and the motor read their heading from: the camera, or the drift control frame.</summary>
+        private Transform ControlReference => _controlFrame != null ? _controlFrame.transform : _camera.transform;
 
         /// <summary>
         /// The baked map is the ground and the walls. The loader builds it, then the circuit takes the
-        /// pieces over so one object owns (and later destroys) the whole track.
+        /// pieces over so one object owns (and later destroys) the whole track. <paramref name="gridSlots"/>
+        /// grows the starting grid by whole rows when the field is bigger than the authored grid.
         /// </summary>
-        private void LoadCircuit(MapAsset map)
+        private void LoadCircuit(MapAsset map, int gridSlots)
         {
-            _map = MapLoader.Load(map, false, transform);
+            _map = MapLoader.Load(map, false, _runtime, gridSlots);
             var layout = new GrayboxCircuitLayout(_map.Center, _map.Size, _map.SurfaceY, _map.SpawnHeight,
                 _map.WallHeight, _map.WallThickness);
             _circuit = DrivingFeatureConfig.CreateOwnedCircuit(_map.Root, _map.Material, layout, _map.Walls,
@@ -148,18 +212,18 @@ namespace FestivalDerby.Drive
         /// </summary>
         private void SpawnCar()
         {
-            CarDefinition definition = DrivingFeatureConfig.ResolveCar(_config, null);
-            _car = CarGeometryFactory.CreateWithoutFloor(definition, _circuit.SpawnPose, transform);
+            CarDefinition definition = DrivingFeatureConfig.ResolveCar(_driving, null);
+            _car = CarGeometryFactory.CreateWithoutFloor(definition, _circuit.SpawnPose, _runtime);
+            _car.Root.name = "Player";
 
             Driver = _car.Body.gameObject.AddComponent<LocalCarFixedStepDriver>();
             Driver.Bind(_car.Body, definition,
-                MotorSetupFactory.ResolveWithProfile(_config, DrivingFeatureConfig.ResolveDriveMode(_config),
-                    _camera.transform));
-            if (_config.SurfaceGripEnabled)
+                _carConfig.ResolveMotor(DrivingFeatureConfig.ResolveDriveMode(_driving), ControlReference));
+            if (_driving.SurfaceGripEnabled)
                 Driver.SetSurfaceGripProvider(SurfaceGripSampler.ProviderFor(_map));
 
-            string visualId = DrivingFeatureConfig.ResolvePlayerVisualId(_config);
-            if (!CarVisualCatalog.TryResolve(_config.Visuals, visualId, out CarVisualEntry entry))
+            string visualId = _carConfig.ModelId;
+            if (!CarVisualCatalog.TryResolve(_driving.Visuals, visualId, out CarVisualEntry entry))
             {
                 Debug.LogWarning("[drive] visual '" + visualId + "' is not in the catalog; the car stays a box.", this);
                 return;
@@ -169,26 +233,34 @@ namespace FestivalDerby.Drive
             if (visual == null)
                 return;
 
-            if (DrivingFeatureConfig.ResolveWheelSpinEnabled(_config))
+            if (_carConfig.Repaint)
+                new CarPaintApplier(visual, entry).Apply(_carConfig.PaintColor);
+
+            if (DrivingFeatureConfig.ResolveWheelSpinEnabled(_driving))
                 _car.Body.gameObject.AddComponent<CarWheelRig>()
                     .Build(visual.transform, Driver, CarVisualCatalog.ResolveWheelSpinSign(entry));
 
             Transform pivot = visual.transform.parent;
-            if (DrivingFeatureConfig.ResolveBodyJuiceEnabled(_config) && pivot != null
+            if (DrivingFeatureConfig.ResolveBodyJuiceEnabled(_driving) && pivot != null
                 && pivot.name == CarVisualAttacher.VisualPivotName)
                 _car.Body.gameObject.AddComponent<CarBodyJuice>()
-                    .Bind(pivot, _car.Body, Driver, CarBodyJuice.ResolveSettings(_config));
+                    .Bind(pivot, _car.Body, Driver, CarBodyJuice.ResolveSettings(_driving),
+                        CarBodyJuice.ResolveDriftSettings(_driving));
         }
 
         private void WireControls()
         {
-            _controls = gameObject.AddComponent<MobileDriveControls>();
-            _controls.Configure(DrivingFeatureConfig.ResolveDriveMode(_config),
-                DrivingFeatureConfig.ResolveStickDeadZone(_config), _camera.transform);
+            GameObject host = _runtime.gameObject;
+            _controls = host.AddComponent<MobileDriveControls>();
+            _controls.Configure(DrivingFeatureConfig.ResolveDriveMode(_driving),
+                DrivingFeatureConfig.ResolveStickDeadZone(_driving), ControlReference);
 
-            _keyboard = gameObject.AddComponent<KeyboardSteer>();
-            if (_touchControls)
-                _hud = TouchHud.Build(transform);
+            bool keyboard = _controlsConfig == null || _controlsConfig.Keyboard;
+            bool touch = _controlsConfig == null || _controlsConfig.TouchControls;
+            if (keyboard)
+                _keyboard = host.AddComponent<KeyboardSteer>();
+            if (touch)
+                _hud = TouchHud.Build(_runtime);
 
             // Touch first, keyboard second: whichever is actually being used drives the car.
             _controls.Bind(Driver, new SteerRouter(_hud != null ? _hud.Stick : null, _keyboard));
@@ -213,9 +285,14 @@ namespace FestivalDerby.Drive
                     look.YawSharpness, look.YawMaxDegreesPerSecond);
             else if (look.YawMode == CameraYawMode.FollowCar)
             {
-                _chase.ConfigureYaw(new CarHeadingSource(_car.Body), false, look.YawSharpness,
-                    look.YawMaxDegreesPerSecond);
+                // A drifting car needs a camera that trails its heading; with drift off these are the look's own values.
+                _chase.ConfigureYaw(new CarHeadingSource(_car.Body), false,
+                    DrivingFeatureConfig.ResolveDriftCameraYawSharpness(_driving, look.YawSharpness),
+                    DrivingFeatureConfig.ResolveDriftCameraYawMaxDegPerSec(_driving, look.YawMaxDegreesPerSecond));
                 _chase.ConfigurePivotAhead(look.PivotAheadMetres);
+                if (_controlFrame != null)
+                    _controlFrame.Bind(new CarHeadingSource(_car.Body), _car.Body.transform,
+                        look.YawSharpness, look.YawMaxDegreesPerSecond);
             }
         }
 
@@ -233,8 +310,9 @@ namespace FestivalDerby.Drive
         /// <summary>After the look on purpose: the palette repaints the circuit, the dressing has its own colours.</summary>
         private void DressTrack()
         {
-            if (_trackside != null)
-                _dresser = TracksideDresser.Spawn(_map, _circuit.Root.transform, _trackside, _tracksideSeed);
+            if (_trackConfig.Trackside != null)
+                _dresser = TracksideDresser.Spawn(_map, _circuit.Root.transform, _trackConfig.Trackside,
+                    _trackConfig.DressingSeed);
         }
 
         /// <summary>
@@ -243,18 +321,113 @@ namespace FestivalDerby.Drive
         /// </summary>
         private void ArmRespawn()
         {
-            if (DrivingFeatureConfig.ResolveStuckRespawnEnabled(_config))
+            if (DrivingFeatureConfig.ResolveStuckRespawnEnabled(_driving))
             {
                 _ghost = new CarGhostMonitor(
-                    DrivingFeatureConfig.ResolveStuckSeconds(_config),
-                    DrivingFeatureConfig.ResolveStuckSpeedLimit(_config),
-                    DrivingFeatureConfig.ResolveGhostSeconds(_config),
-                    DrivingFeatureConfig.ResolveGhostAlpha(_config));
+                    DrivingFeatureConfig.ResolveStuckSeconds(_driving),
+                    DrivingFeatureConfig.ResolveStuckSpeedLimit(_driving),
+                    DrivingFeatureConfig.ResolveGhostSeconds(_driving),
+                    DrivingFeatureConfig.ResolveGhostAlpha(_driving));
                 Transform visualRoot = _car.Body.transform.Find(CarVisualAttacher.VisualPivotName);
                 _ghost.Bind(visualRoot, new Collider[] { _car.Chassis });
             }
 
             _respawn = new PlayerRespawn(_car.Body, _circuit, _ghost);
+        }
+
+        /// <summary>
+        /// The bots drive the player's car read through a car-relative axis (a bot has a steering wheel,
+        /// not a screen-space stick), so only their pace makes them slower than the player.
+        /// </summary>
+        private void SpawnBots(int count)
+        {
+            MotorSetup setup = _carConfig.ResolveMotor(JoystickDriveMode.CarRelative, null);
+            _bots = BotField.Spawn(count, _map, _circuit, _driving, setup,
+                _botsConfig != null ? _botsConfig.Models : null,
+                _botsConfig != null ? _botsConfig.Liveries : null,
+                _botsConfig != null ? _botsConfig.SlowestPace : 1f,
+                _botsConfig != null ? _botsConfig.FastestPace : 1f,
+                _runtime);
+        }
+
+        /// <summary>
+        /// The rules of this run. Free drive (the default, and what a scene without a Match config gets)
+        /// adds nothing: no truck, no HUD, no eliminations.
+        /// </summary>
+        private void StartMatch()
+        {
+            MatchMode mode = ResolveMatchMode();
+            if (mode != MatchMode.TruckChase && mode != MatchMode.Laps)
+                return;
+
+            var bots = new RacingLineBot[_bots.Count];
+            for (int i = 0; i < bots.Length; i++)
+                bots[i] = _bots[i];
+
+            MatchConfig config = _matchConfig;
+            if (mode == MatchMode.Laps)
+            {
+                _lapRace = LapRaceSession.Create(new LapRaceSetup
+                {
+                    Line = _map.RacingLine,
+                    Laps = ResolveLaps(),
+                    Parent = _runtime,
+                    StartDelay = config != null ? config.StartDelay : 3f,
+                    PlayerBody = _car.Body,
+                    PlayerDriver = Driver,
+                    Bots = bots,
+                });
+                if (_lapRace == null)
+                    Debug.LogWarning("[drive] The lap race could not start: the circuit has no usable racing line.", this);
+                return;
+            }
+
+            var setup = new TruckChaseSetup
+            {
+                Line = _map.RacingLine,
+                Truck = TruckSettings.Default.WithSpeed(config != null ? config.TruckSpeed : TruckSettings.Default.Speed),
+                Rules = new TruckChaseSettings(config != null ? config.BoardSeconds : 3f,
+                    config != null ? config.EliminationSeconds : 20f, TruckSettings.Default.BedHalfLength),
+                TruckMaterial = _circuit.Material,
+                Parent = _runtime,
+                StartDelay = config != null ? config.StartDelay : 3f,
+                LeadMeters = config != null ? config.TruckLeadMeters : 45f,
+                PlayerGridPosition = _circuit.SpawnPose.position,
+                PlayerBody = _car.Body,
+                PlayerDriver = Driver,
+                Bots = bots,
+            };
+
+            _truckChase = TruckChaseSession.Create(setup);
+            if (_truckChase == null)
+                Debug.LogWarning("[drive] The truck chase could not start: the circuit has no usable racing line.", this);
+        }
+
+        /// <summary>The menu's choice wins when the config allows it; otherwise the config's own mode.</summary>
+        private MatchMode ResolveMatchMode()
+        {
+            MatchMode mode = _matchConfig != null ? _matchConfig.Mode : MatchMode.FreeDrive;
+            // Only a run that came from the menu's Play button carries a choice; a Gameplay scene opened on its
+            // own must not inherit whatever was saved last time.
+            if (MenuSession.HasLaunch && (_matchConfig == null || _matchConfig.UseMenuSelection))
+            {
+                switch (MenuSession.Current.ModeId)
+                {
+                    case MenuSelection.ModeTruckChase: return MatchMode.TruckChase;
+                    case MenuSelection.ModeRace: return MatchMode.Laps;
+                    case MenuSelection.ModeFreeDrive: return MatchMode.FreeDrive;
+                }
+            }
+
+            return mode;
+        }
+
+        /// <summary>The menu's lap count when the menu chose the laps mode; otherwise the config's.</summary>
+        private int ResolveLaps()
+        {
+            bool fromMenu = MenuSession.HasLaunch && (_matchConfig == null || _matchConfig.UseMenuSelection)
+                && MenuSession.Current.ModeId == MenuSelection.ModeRace;
+            return fromMenu ? MenuSession.Current.Laps : (_matchConfig != null ? _matchConfig.Laps : 3);
         }
 
         private void Update()
@@ -266,8 +439,10 @@ namespace FestivalDerby.Drive
 
             CarHandlingReadout readout = Driver.ReadHandlingDebug();
             _respawn.Tick(Time.deltaTime, readout.SpeedMetersPerSecond, readout.Throttle, Driver.IsOnMovingGround);
+            _bots.Tick(Time.deltaTime);
 
-            bool resetPressed = Input.GetKeyDown(_resetKey) || (_hud != null && _hud.Reset.Held);
+            KeyCode resetKey = _controlsConfig != null ? _controlsConfig.ResetKey : KeyCode.R;
+            bool resetPressed = Input.GetKeyDown(resetKey) || (_hud != null && _hud.Reset.Held);
             if (resetPressed)
                 ResetCar();
         }
@@ -275,9 +450,9 @@ namespace FestivalDerby.Drive
         /// <summary>The pedal slots have one writer, here, fed by the touch buttons and the keyboard alike.</summary>
         private void SyncPedals()
         {
-            bool brake = (_hud != null && _hud.Brake.Held) || _keyboard.BrakeHeld;
-            bool reverse = _keyboard.ReverseHeld;
-            bool nitro = (_hud != null && _hud.Nitro.Held) || _keyboard.NitroHeld;
+            bool brake = (_hud != null && _hud.Brake.Held) || (_keyboard != null && _keyboard.BrakeHeld);
+            bool reverse = _keyboard != null && _keyboard.ReverseHeld;
+            bool nitro = (_hud != null && _hud.Nitro.Held) || (_keyboard != null && _keyboard.NitroHeld);
 
             if (brake != _brake)
                 _controls.Set(DriveControlSlot.Brake, _brake = brake);
@@ -299,6 +474,7 @@ namespace FestivalDerby.Drive
             if (_chase != null)
                 _chase.Stop();
             _ghost?.Teardown();
+            _bots?.Dispose();
             _look?.Dispose();
             if (_dresser != null)
                 _dresser.Dispose();

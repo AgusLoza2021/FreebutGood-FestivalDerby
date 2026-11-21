@@ -4,7 +4,8 @@
     "references": [
         "FestivalDerby.Drive",
         "FestivalDerby.Driving.Runtime",
-        "FestivalDerby.World"
+        "FestivalDerby.World",
+        "FestivalDerby.Look"
     ],
     "includePlatforms": [
         "Editor"

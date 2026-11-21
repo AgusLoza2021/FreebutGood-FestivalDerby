@@ -2,12 +2,16 @@
     "name": "FestivalDerby.Drive",
     "rootNamespace": "FestivalDerby.Drive",
     "references": [
+        "FestivalDerby.Bots",
         "FestivalDerby.Driving.Handling",
         "FestivalDerby.Driving.Rules",
         "FestivalDerby.Driving.Runtime",
         "FestivalDerby.World",
         "FestivalDerby.World.Core",
         "FestivalDerby.Look",
+        "FestivalDerby.Match",
+        "FestivalDerby.Match.Core",
+        "FestivalDerby.Menu",
         "UnityEngine.UI"
     ],
     "includePlatforms": [],

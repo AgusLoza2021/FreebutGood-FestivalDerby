@@ -2,19 +2,16 @@ using System.Collections;
 using FestivalDerby.Driving.Runtime;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 namespace FestivalDerby.Drive.Tests
 {
     /// <summary>
-    /// The one end-to-end check of the template: open the Drive scene, push the stick forward for a few
-    /// seconds, and prove the car actually drove and the chase camera came along.
+    /// The one end-to-end check of the template: open the Drive scene with no bots, push the stick forward
+    /// for a few seconds, and prove the car actually drove and the chase camera came along.
     /// </summary>
     public sealed class DriveSceneSmokeTests
     {
-        private const string SceneName = "Drive";
-        private const float BuildTimeoutSeconds = 10f;
         private const float SettleSeconds = 1f;
         private const float DriveSeconds = 4f;
 
@@ -26,58 +23,24 @@ namespace FestivalDerby.Drive.Tests
             public bool HasInput => true;
         }
 
-        private bool _previousRunInBackground;
-        private int _previousTargetFrameRate;
+        private DriveSceneHarness _scene;
 
-        [SetUp]
-        public void SetUp()
-        {
-            _previousRunInBackground = Application.runInBackground;
-            _previousTargetFrameRate = Application.targetFrameRate;
-            // A background Editor freezes the player loop; the car would never move.
-            Application.runInBackground = true;
-        }
-
-        /// <summary>
-        /// The Drive scene builds a whole circuit, a look and a car at the world origin. Left loaded, it
-        /// would sit under every later PlayMode test's rig, so it is swapped for an empty scene here.
-        /// </summary>
         [UnityTearDown]
         public IEnumerator TearDown()
         {
-            Scene drive = SceneManager.GetSceneByName(SceneName);
-            if (drive.IsValid() && drive.isLoaded)
-            {
-                Scene empty = SceneManager.CreateScene("DriveSmokeEmpty");
-                SceneManager.SetActiveScene(empty);
-                yield return SceneManager.UnloadSceneAsync(drive);
-            }
-
-            Application.runInBackground = _previousRunInBackground;
-            Application.targetFrameRate = _previousTargetFrameRate;
+            if (_scene != null)
+                yield return _scene.Unload();
         }
 
+        /// <summary>With zero bots the scene must behave exactly as the solo template did before bots existed.</summary>
         [UnityTest]
-        public IEnumerator DriveScene_StickForward_CarMovesAndCameraFollows()
+        public IEnumerator DriveScene_NoBots_StickForward_CarMovesAndCameraFollows()
         {
-            SceneManager.LoadScene(SceneName);
-            yield return null;
-            Assert.AreEqual(SceneName, SceneManager.GetActiveScene().name,
-                "The Drive scene must be in the build settings (Festival Derby/Build Drive Scene).");
+            _scene = new DriveSceneHarness(0);
+            yield return _scene.Load();
+            DriveBootstrap bootstrap = _scene.Bootstrap;
 
-            DriveBootstrap bootstrap = null;
-            float waited = 0f;
-            while (waited < BuildTimeoutSeconds)
-            {
-                bootstrap = Object.FindFirstObjectByType<DriveBootstrap>();
-                if (bootstrap != null && bootstrap.Built)
-                    break;
-                waited += Time.unscaledDeltaTime;
-                yield return null;
-            }
-
-            Assert.IsNotNull(bootstrap, "The Drive scene must carry a DriveBootstrap.");
-            Assert.IsTrue(bootstrap.Built, "The bootstrap did not build within " + BuildTimeoutSeconds + " s.");
+            Assert.AreEqual(0, bootstrap.BotCount, "Bots count 0 must spawn no AI car.");
             Assert.IsNotNull(bootstrap.CarBody, "No car was spawned.");
             Assert.IsNotNull(bootstrap.Camera, "No camera was created.");
 
