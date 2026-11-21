@@ -180,6 +180,18 @@ namespace FestivalDerby.Match.Tests
         }
 
         [Test]
+        public void WithStartDistance_ChangesOnlyTheStart()
+        {
+            TruckSettings moved = Settings.WithStartDistance(120f);
+
+            Assert.That(moved.StartDistance, Is.EqualTo(120f));
+            Assert.That(moved.Speed, Is.EqualTo(Settings.Speed));
+            Assert.That(moved.BedLength, Is.EqualTo(Settings.BedLength));
+            Assert.That(moved.IsValid, Is.True);
+            Assert.That(TruckMotion.DistanceAt(moved, 0.0, 1000f), Is.EqualTo(120f));
+        }
+
+        [Test]
         public void DefaultSettings_AreValid_AndADefaultStructIsNot()
         {
             Assert.That(TruckSettings.Default.IsValid, Is.True);

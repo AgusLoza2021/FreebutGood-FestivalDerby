@@ -1,0 +1,19 @@
+{
+    "name": "FestivalDerby.Match",
+    "rootNamespace": "FestivalDerby.Match",
+    "references": [
+        "FestivalDerby.Match.Core",
+        "FestivalDerby.Driving.Runtime",
+        "FestivalDerby.World",
+        "FestivalDerby.World.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

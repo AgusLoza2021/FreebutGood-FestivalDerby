@@ -15,7 +15,7 @@ Assumptions (not asked, all tunable in a config, not in code): elimination inter
 ## Tasks
 - [x] T1 (S2,S3,S4) Engine-free match rules + EditMode tests (BoardingTimer, OvertakeRule, EliminationClock, TruckChaseMatch). Route: inline.
 - [x] T2a (S1,S6) Pure truck pieces ported from the old CATCH: TruckSettings, TruckPose/WheelProbe, TruckBed (settled rule), TruckMotion (BakedPath). Route: inline.
-- [ ] T2b (S1,S6) Unity truck view: kinematic body, box cab/deck/chassis/ramp, IGroundVelocitySource, wheel probe per car (adapt CatchCarrierView). Route: inline.
+- [x] T2b (S1,S6) (compiles against Unity DLLs; runtime behaviour NOT yet exercised in Unity) Unity truck view: kinematic body, box cab/deck/chassis/ramp, IGroundVelocitySource, wheel probe per car (adapt CatchCarrierView). Route: inline.
 - [ ] T3 (S1) Bot boarding: bots catch up with the truck tail, climb the ramp, hold the bed. Route: inline.
 - [ ] T4 (S1-S4) Match controller wired in DriveBootstrap + HUD (countdown, board timer, win/lose). Route: inline.
 - [ ] T5 (S5) Laps mode on the same match seam + menu mode ids. Route: inline.
