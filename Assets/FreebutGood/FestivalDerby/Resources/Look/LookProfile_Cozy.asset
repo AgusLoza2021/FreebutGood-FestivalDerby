@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734efaba4b1b4147abfad0f7df346878, type: 3}
+  m_Name: LookProfile_Cozy
+  m_EditorClassIdentifier: 
+  LookProfileEnabled: 1
+  CameraOffset: {x: -14.1, y: 4.24, z: 0}
+  CameraLookHeight: 2.06
+  CameraFov: 30
+  CameraFollowSharpness: 6
+  LookAheadMetresPerSpeed: 0.08
+  LookAheadMaxMetres: 1.8
+  LookAheadSharpness: 5
+  SpeedFovWidenDegrees: 2
+  SpeedFovAtMetresPerSecond: 26
+  SpeedFovSharpness: 1.6
+  YawMode: 2
+  ChaseOffset: {x: 0, y: 9, z: -14}
+  PivotAheadMetres: 6
+  TrackLookAheadMetres: 18
+  YawSharpness: 3
+  YawMaxDegreesPerSecond: 120
+  SunColor: {r: 1, g: 0.86, b: 0.7, a: 1}
+  SunIntensity: 1.25
+  SunEulerAngles: {x: 40, y: 125, z: 0}
+  SunShadowStrength: 0.7
+  AmbientTrilight: 1
+  AmbientSky: {r: 0.62, g: 0.7, b: 0.86, a: 1}
+  AmbientEquator: {r: 0.58, g: 0.6, b: 0.66, a: 1}
+  AmbientGround: {r: 0.4, g: 0.4, b: 0.42, a: 1}
+  CameraBackground: {r: 0.62, g: 0.76, b: 0.9, a: 1}
+  PaletteOverrideEnabled: 1
+  FlatAsphaltTexture: 1
+  AsphaltColor: {r: 0.42, g: 0.43, b: 0.45, a: 1}
+  GroundColor: {r: 0.52, g: 0.76, b: 0.34, a: 1}
+  WallColor: {r: 0.88, g: 0.9, b: 0.92, a: 1}
+  KerbColor: {r: 0.92, g: 0.28, b: 0.24, a: 1}
+  GroundFillEnabled: 1
+  GroundFillMargin: 40
+  GroundFillDepth: 0.06
+  PostProfile: {fileID: 11400000, guid: b6e9c90f3865d7340a08742fcc875c11, type: 2}

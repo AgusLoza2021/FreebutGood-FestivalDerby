@@ -1,0 +1,197 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f7c2d3b91a54d6e8c0b7a1f2e3d4c5b, type: 3}
+  m_Name: CarVisualCatalog
+  m_EditorClassIdentifier: 
+  DefaultId: ToySedan
+  AllowUnapprovedModels: 0
+  Entries:
+  - Id: ToySedan
+    Model: {fileID: 9159201472383509995, guid: 9e6fb385180afe74a84d18e71d5515d8, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToySedan_Body
+    PartsModel: {fileID: 8370859469276067119, guid: d5e23ddd46fd6ed4782680e2768dc4cf, type: 3}
+  - Id: ToySedanSports
+    Model: {fileID: 6359859640725488420, guid: f9c0adecd79f9a74b806ad11a7afb6af, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToySedanSports_Body
+    PartsModel: {fileID: 0}
+  - Id: ToyHatchbackSports
+    Model: {fileID: 4255788821219084303, guid: 4f402ef7374d26e468cae991db2b535c, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToyHatchbackSports_Body
+    PartsModel: {fileID: 0}
+  - Id: ToySuv
+    Model: {fileID: 9081945647848139270, guid: d517b6f1bdb0b61438be073de07567f5, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToySuv_Body
+    PartsModel: {fileID: 5214168411706666631, guid: 71345d5249925dd46b8593afd8ece14d, type: 3}
+  - Id: ToySuvLuxury
+    Model: {fileID: 4435580937253508683, guid: 7e422870cbe52eb42a5bec5f600b040a, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToySuvLuxury_Body
+    PartsModel: {fileID: 0}
+  - Id: ToyVan
+    Model: {fileID: 6823382007824576334, guid: 0f9f2bc7c7acc5048899522283da22c9, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToyVan_Body
+    PartsModel: {fileID: 6134521157615326561, guid: 02a16f65753891d45a2695136231994b, type: 3}
+  - Id: ToyDelivery
+    Model: {fileID: 4778903475317266757, guid: 628c6368781c8de4c99cf9b7385d84e4, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToyDelivery_Body
+    PartsModel: {fileID: 0}
+  - Id: ToyTaxi
+    Model: {fileID: 7856794464007004720, guid: f6fe7f5bd53b4bd44875c1ebc019078d, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToyTaxi_Body
+    PartsModel: {fileID: 3847447455208418035, guid: 6dc252be8f35ff24996060decc4f40bb, type: 3}
+  - Id: ToyPolice
+    Model: {fileID: 8205623893097528306, guid: 1379b248daa0aa142b5916da689cdc66, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToyPolice_Body
+    PartsModel: {fileID: 8066667959732333000, guid: f77cb4e246749224aae449170d2154c6, type: 3}
+  - Id: ToyTruck
+    Model: {fileID: 9005968266375485979, guid: d859985ceefe9994fa6f5611ae4125e9, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToyTruck_Body
+    PartsModel: {fileID: 435650511542879943, guid: e0ed6d51cdc9c3c4cb183ec00cc3936d, type: 3}
+  - Id: ToyRace
+    Model: {fileID: 6717197542579984289, guid: e72dac105c15a074bbec10247bb53c7c, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToyRace_Body
+    PartsModel: {fileID: 3849342974557430942, guid: 03dad96f07b801247b320a6a673066d3, type: 3}
+  - Id: ToyAmbulance
+    Model: {fileID: 4278841086237263603, guid: f506026e19c56ce489bf60a965ee9bae, type: 3}
+    Approved: 1
+    EulerOffset: {x: 0, y: -0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - ToyAmbulance_Body
+    PartsModel: {fileID: 0}
+  - Id: KitDragRacer
+    Model: {fileID: 6762147393383788770, guid: 2fca2654fa6ea9a4ba38abfa4863bf3b, type: 3}
+    Approved: 0
+    EulerOffset: {x: 0, y: 0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - KitDragRacer_Body
+    PartsModel: {fileID: 0}
+  - Id: KitMonsterTruck
+    Model: {fileID: 4832016242195033211, guid: cc687559afec9bc44bda21c4fb99f4e6, type: 3}
+    Approved: 0
+    EulerOffset: {x: 0, y: 0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - KitMonsterTruck_Body
+    PartsModel: {fileID: 0}
+  - Id: KitRacer
+    Model: {fileID: 8611446710393251162, guid: 89f210b3b39c1594ba4912d10d164d6c, type: 3}
+    Approved: 0
+    EulerOffset: {x: 0, y: 0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - KitRacer_Body
+    PartsModel: {fileID: 0}
+  - Id: KitRacerLow
+    Model: {fileID: 5608004035635678432, guid: 3056fa20efb29964c9870917042271b7, type: 3}
+    Approved: 0
+    EulerOffset: {x: 0, y: 0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - KitRacerLow_Body
+    PartsModel: {fileID: 0}
+  - Id: KitSpeedster
+    Model: {fileID: 4898476944106235943, guid: caf6ad31623561c41a0d10ee591bfefc, type: 3}
+    Approved: 0
+    EulerOffset: {x: 0, y: 0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - KitSpeedster_Body
+    PartsModel: {fileID: 0}
+  - Id: KitSuv
+    Model: {fileID: 9187886803233273524, guid: f9d7dcb814399dd40a626c535979e2a5, type: 3}
+    Approved: 0
+    EulerOffset: {x: 0, y: 0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - KitSuv_Body
+    PartsModel: {fileID: 0}
+  - Id: KitTruck
+    Model: {fileID: 5021804621387547899, guid: 8691951e38969a44fafff10d39792041, type: 3}
+    Approved: 0
+    EulerOffset: {x: 0, y: 0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - KitTruck_Body
+    PartsModel: {fileID: 0}
+  - Id: KitVintageRacer
+    Model: {fileID: 4260516852995371610, guid: e7f55d98221268e4abe6164edad1a263, type: 3}
+    Approved: 0
+    EulerOffset: {x: 0, y: 0, z: 0}
+    ScaleMultiplier: 1
+    WheelSpinSign: 1
+    PaintTargets:
+    - KitVintageRacer_Body
+    PartsModel: {fileID: 0}

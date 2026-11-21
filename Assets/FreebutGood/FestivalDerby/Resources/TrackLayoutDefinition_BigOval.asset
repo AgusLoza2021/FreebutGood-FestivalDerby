@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20c88c0bca34369b10a985d0511b795, type: 3}
+  m_Name: TrackLayoutDefinition_BigOval
+  m_EditorClassIdentifier: 
+  Kind: 0
+  OuterLength: 150
+  OuterWidth: 90
+  TrackWidth: 16
+  CornerRadius: 25
+  WallHeight: 1.2
+  WallThickness: 0.5
+  RunOff: 5
+  RouteSampleCount: 48
+  SpawnGrid:
+    Columns: 3
+    Rows: 2
+    Spacing: 4.5
+  HasCameraOverride: 1
+  CameraOffset: {x: -16, y: 30, z: -14}
+  CameraLookHeight: 2

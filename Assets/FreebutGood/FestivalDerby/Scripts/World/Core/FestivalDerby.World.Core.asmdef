@@ -1,0 +1,14 @@
+{
+    "name": "FestivalDerby.World.Core",
+    "rootNamespace": "FestivalDerby.World",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

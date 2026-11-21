@@ -1,0 +1,97 @@
+# Normalizacion de fin de linea.
+# El repo guarda TODO en LF; cada checkout usa el fin de linea nativo del SO.
+# Sin esto, git en Windows avisa "LF will be replaced by CRLF" en cada archivo que
+# toca, y dos maquinas con distinta config generan diffs fantasma de archivo entero.
+* text=auto
+
+# Codigo y config: texto siempre, sin autodeteccion.
+*.cs        text diff=csharp
+*.shader    text
+*.hlsl      text
+*.cginc     text
+*.compute   text
+*.json      text
+*.md        text
+*.txt       text
+*.xml       text
+*.yml       text
+*.yaml      text
+*.js        text
+*.ts        text
+*.html      text
+*.css       text
+*.asmdef    text
+*.asmref    text
+*.uss       text
+*.uxml      text
+
+# Scripts de Windows: necesitan CRLF si o si en el working copy.
+*.ps1       text eol=crlf
+*.bat       text eol=crlf
+*.cmd       text eol=crlf
+
+# Scripts de shell: LF si o si o no ejecutan.
+*.sh        text eol=lf
+
+# YAML de Unity. Es texto, pero el merge de tres vias con el algoritmo de git
+# corrompe escenas y prefabs. unityyamlmerge entiende la estructura.
+# Requiere configurar el merge driver local (Unity lo trae en Editor/Data/Tools).
+*.unity     text merge=unityyamlmerge eol=lf
+*.prefab    text merge=unityyamlmerge eol=lf
+*.asset     text merge=unityyamlmerge eol=lf
+*.mat       text merge=unityyamlmerge eol=lf
+*.anim      text merge=unityyamlmerge eol=lf
+*.controller text merge=unityyamlmerge eol=lf
+*.overrideController text merge=unityyamlmerge eol=lf
+*.physicMaterial text merge=unityyamlmerge eol=lf
+*.physicsMaterial2D text merge=unityyamlmerge eol=lf
+*.playable  text merge=unityyamlmerge eol=lf
+*.mask      text merge=unityyamlmerge eol=lf
+*.brush     text merge=unityyamlmerge eol=lf
+*.flare     text merge=unityyamlmerge eol=lf
+*.fontsettings text merge=unityyamlmerge eol=lf
+*.guiskin   text merge=unityyamlmerge eol=lf
+*.giparams  text merge=unityyamlmerge eol=lf
+*.meta      text merge=unityyamlmerge eol=lf
+*.mixer     text merge=unityyamlmerge eol=lf
+*.terrainlayer text merge=unityyamlmerge eol=lf
+*.shadervariants text merge=unityyamlmerge eol=lf
+*.spriteatlas text merge=unityyamlmerge eol=lf
+*.signal    text merge=unityyamlmerge eol=lf
+
+# Binarios. Marcados a mano para que git no intente diffear ni normalizar.
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.psd       binary
+*.tga       binary
+*.tif       binary
+*.tiff      binary
+*.bmp       binary
+*.exr       binary
+*.hdr       binary
+*.ico       binary
+*.cubemap   binary
+*.wav       binary
+*.mp3       binary
+*.ogg       binary
+*.aif       binary
+*.aiff      binary
+*.fbx       binary
+*.obj       binary
+*.blend     binary
+*.dae       binary
+*.3ds       binary
+*.ttf       binary
+*.otf       binary
+*.dll       binary
+*.so        binary
+*.pdb       binary
+*.a         binary
+*.mdb       binary
+*.unitypackage binary
+*.aar       binary
+*.jar       binary
+*.zip       binary
+*.pdf       binary

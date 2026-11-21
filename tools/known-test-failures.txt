@@ -1,0 +1,4 @@
+# Tests that already fail on the base and do not count as new failures.
+# One full test name per line. Remove a line only when that test is fixed.
+FestivalDerby.Driving.Tests.TrackLayoutDefinitionEditModeTests.ShippedBigOvalAsset_ImportsAndResolvesToTheDocumentedDimensions
+FestivalDerby.Look.Tests.LookProfileEditModeTests.ShippedProfile_CarriesTheCameraGroupTheCodeDefaultsDescribe

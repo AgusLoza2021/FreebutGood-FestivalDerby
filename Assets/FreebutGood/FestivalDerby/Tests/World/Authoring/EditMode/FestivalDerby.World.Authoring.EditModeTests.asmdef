@@ -1,0 +1,28 @@
+{
+    "name": "FestivalDerby.World.Authoring.EditModeTests",
+    "rootNamespace": "FestivalDerby.World.Tests",
+    "references": [
+        "FestivalDerby.World.Core",
+        "FestivalDerby.World",
+        "FestivalDerby.World.Editor",
+        "Unity.Mathematics",
+        "Unity.Splines",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

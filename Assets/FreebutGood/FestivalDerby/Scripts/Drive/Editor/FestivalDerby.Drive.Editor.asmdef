@@ -1,0 +1,20 @@
+{
+    "name": "FestivalDerby.Drive.Editor",
+    "rootNamespace": "FestivalDerby.Drive.Editor",
+    "references": [
+        "FestivalDerby.Drive",
+        "FestivalDerby.Driving.Runtime",
+        "FestivalDerby.World"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

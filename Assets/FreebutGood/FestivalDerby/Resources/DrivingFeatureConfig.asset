@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df72b684a7b459eaa47625f3cd7bf39, type: 3}
+  m_Name: DrivingFeatureConfig
+  m_EditorClassIdentifier: 
+  Car: {fileID: 11400000, guid: bc4dfcf51c8edb740b0048d0c75b63d8, type: 2}
+  DriveMode: 0
+  HandlingModel: 1
+  Scheme: 1
+  Handling: {fileID: 11400000, guid: 3d25c80dad9cb1c6b5a199b734136133, type: 2}
+  StickDeadZone: 0.15
+  Map: {fileID: 11400000, guid: 4538161d092dc024f975b388fad93800, type: 2}
+  WheelSpinEnabled: 1
+  BodyJuiceEnabled: 1
+  BodyRollGain: 0.12
+  BodyRollMaxDeg: 1.6
+  BodyPitchGain: 0.1
+  BodyPitchMaxDeg: 1.2
+  BodySquashScale: 0.12
+  BodySquashSeconds: 0.25
+  BodyFilterTau: 0.12
+  SurfaceGripEnabled: 1
+  StuckRespawnEnabled: 1
+  StuckSeconds: 5
+  StuckSpeedLimit: 0.5
+  GhostSeconds: 3
+  GhostAlpha: 0.45
+  WallGlanceEnabled: 1
+  CameraOffset: {x: -12, y: 11, z: -8}
+  LookHeight: 2
+  FollowSharpness: 10
+  Visuals: {fileID: 11400000, guid: 4f9bfcc784e12364199a94df1b92b74c, type: 2}
+  VisualSet: 1
+  PlayerVisualId: ToySedan
+  PlayerVisualIdToy: ToySedan
+  Look: {fileID: 11400000, guid: 21836a5ee6c496c40b6a54350fdeff18, type: 2}

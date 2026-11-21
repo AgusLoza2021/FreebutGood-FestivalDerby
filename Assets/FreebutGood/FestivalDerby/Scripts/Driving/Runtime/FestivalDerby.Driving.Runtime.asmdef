@@ -1,0 +1,19 @@
+{
+    "name": "FestivalDerby.Driving.Runtime",
+    "rootNamespace": "FestivalDerby.Driving.Runtime",
+    "references": [
+        "FestivalDerby.Driving.Handling",
+        "FestivalDerby.Driving.Rules",
+        "FestivalDerby.World",
+        "FestivalDerby.World.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,467 @@
+# Unity generated
+/[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]serSettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# Never ignore Asset meta data
+!/[Aa]ssets/**/*.meta
+
+# Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+ExportedObj/
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Unity crash reports
+sysinfo.txt
+crashlytics-build.properties
+
+# Builds
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Telemetria bajada del celular (Tools/pull-analytics.ps1).
+# Son datos de playtest: pesados, efimeros, y con ids de dispositivo. No van al repo.
+/AnalyticsData/
+
+# APKs generados por Ninja/Build.
+/Builds/
+
+# Capturas de Tools/resume-stress.ps1: logcat, bugreports y tombstones del device.
+# Decenas de MB por corrida, efimeras, y con datos del telefono. Se regeneran corriendo
+# el script de nuevo.
+/Tools/resume-runs/
+
+# Cloudflare Worker del ingestor de analytics (Tools/AnalyticsIngest)
+# .dev.vars tiene los tokens de desarrollo local; .wrangler/ es estado de miniflare.
+.dev.vars
+.wrangler/
+
+# Cache del build nativo (ninja/IL2CPP). Se regenera solo en cada build de Android
+# y ensuciaba cada commit con cientos de archivos de fingerprint y compile_commands.
+/.utmp/
+
+# Generado por el paquete Entities al buildear subscenes. Cache derivado, se rehace
+# solo. Vive bajo Assets/ solo porque DOTS lo pone ahi, no es un asset autorado.
+/Assets/SceneDependencyCache/
+/Assets/SceneDependencyCache.meta
+
+# Artefacto de deploy del dashboard (se regenera con build.mjs + cp)
+Tools/AnalyticsDashboard/dist/
+
+# Capturas y reportes de profiling en device (SurfaceFlinger --timestats, dumps del
+# RuntimeProfiler, JSONs de render por frame). Son evidencia de UNA sesion de medicion
+# en UN telefono: 1.1 MB que no se releen desde otra maquina y que cada corrida
+# reescribe. Las CONCLUSIONES viven en Engram y en Documentation/, que es lo que
+# sobrevive; los .txt/.json crudos se quedan locales.
+/Profiling/
+
+# ── LMHPOLY / Low Poly Nature Bundle (paquete pago del Asset Store) ──────────
+# 21.315 assets, 659 MB, y el juego usa 136 (3,3 MB) = 0,51 %. Medido con el
+# cierre transitivo por GUID desde el arte propio (Tools/verify-lmhpoly-closure.ps1).
+#
+# Por que NO va entero: la historia de git es append-only. Meterlo llevaria .git de
+# 726 MB a ~1,4 GB PARA SIEMPRE, y sacarlo despues exige filter-repo/BFG + force
+# push, que invalida todos los clones. Git LFS tampoco sirve: el free tier son 1 GB
+# de storage y 1 GB/mes de bandwidth, y cada clone lo quema.
+#
+# Lo que SI va: el cierre transitivo, para que un clone limpio compile y corra sin
+# referencias faltantes. Lo que NO va se re-descarga del Asset Store (las compras
+# quedan disponibles) y solo hace falta para re-correr BiomeArtSetup > Scan Sources,
+# que rankea las 363 rocas del paquete para auto-elegir fuentes.
+#
+# ⚠ El repo es PRIVADO. Si se hace PUBLICO, esto tiene que salir: redistribuir
+# assets pagos viola la EULA del Asset Store.
+#
+# ⚠ MODO DE FALLA SILENCIOSO: si agregas un asset nuevo del paquete a un bioma, no
+# entra solo — queda untracked y otra maquina lo ve como malla faltante. Corre
+# Tools/verify-lmhpoly-closure.ps1 antes de una release.
+/Assets/LMHPOLY/**
+# Re-incluir los DIRECTORIOS: git no puede re-incluir un archivo si su carpeta
+# esta excluida, asi que primero hay que dejarlo entrar a las carpetas.
+!/Assets/LMHPOLY/**/
+# ...y despues, exactamente los archivos del cierre (generado, no editar a mano):
+!/Assets/LMHPOLY.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Materials.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Materials/CPT_Terrain_01.mat
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Materials/CPT_Terrain_01.mat.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Materials/CPT_Terrain_02.mat
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Materials/CPT_Terrain_02.mat.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Mountains.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Mountains/CPT.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Mountains/CPT/NoLOD.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Mountains/CPT/NoLOD/L.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Mountains/CPT/NoLOD/L/CPT_Mountain_L_a_39.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Mountains/CPT/NoLOD/L/CPT_Mountain_L_a_39.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Mountains/CPT/NoLOD/L/CPT_Mountain_L_a_40.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Mountains/CPT/NoLOD/L/CPT_Mountain_L_a_40.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Mountains/CPT/NoLOD/M.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Mountains/CPT/NoLOD/M/CPT_Mountain_M_a_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Mountains/CPT/NoLOD/M/CPT_Mountain_M_a_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_07.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_07.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_25.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_25.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_28.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_28.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_37.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_37.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_45.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_45.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_c_03.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_c_03.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_c_16.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Meshes/Terrain/CPT/NoLOD/L/CPT_Terrain_L_c_16.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Mountains.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Mountains/CPT.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Mountains/CPT/NoLOD.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Mountains/CPT/NoLOD/L.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Mountains/CPT/NoLOD/L/CPT_Mountain_L_a_39.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Mountains/CPT/NoLOD/L/CPT_Mountain_L_a_39.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Mountains/CPT/NoLOD/L/CPT_Mountain_L_a_40.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Mountains/CPT/NoLOD/L/CPT_Mountain_L_a_40.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_07.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_07.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_25.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_25.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_28.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_28.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_37.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_37.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_45.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_b_45.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_c_03.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_c_03.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_c_16.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Prefabs/Terrain/CPT/NoLOD/L/CPT_Terrain_L_c_16.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Textures.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Textures/CPT_Terrain_Texture_Atlas_01.png
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Textures/CPT_Terrain_Texture_Atlas_01.png.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Textures/CPT_Terrain_Texture_Atlas_02.png
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Modular Terrain/Terrain_Assets/Textures/CPT_Terrain_Texture_Atlas_02.png.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Materials.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Materials/Crystals.mat
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Materials/Crystals.mat.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Materials/Rocks_Snow.mat
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Materials/Rocks_Snow.mat.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_crk_m_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_crk_m_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_crk_m_05.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_crk_m_05.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_m_04.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_m_04.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_m_05.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_m_05.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_m_06.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_m_06.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_m_15.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Block_m_15.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_m_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_m_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_m_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_m_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_m_03.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_m_03.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_m_04.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_m_04.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_s_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_s_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_s_04.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_s_04.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_s_05.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Block_Rocks/Rock_Blocks_s_05.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Rock_Walls.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Rock_Walls/Rock_Wall_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Rock_Walls/Rock_Wall_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rock_Round_l_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rock_Round_l_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rock_Round_l_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rock_Round_l_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rock_Round_l_03.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rock_Round_l_03.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rock_Round_l_07.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rock_Round_l_07.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rocks_Round_l_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rocks_Round_l_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rocks_Round_l_03.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Round_Rocks/Rocks_Round_l_03.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_crk_m_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_crk_m_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_crk_m_03.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_crk_m_03.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_m_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_m_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_m_15.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_m_15.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_s_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_s_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_s_06.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rock_Sharp_s_06.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rocks_Sharp_l_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rocks_Sharp_l_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rocks_Sharp_l_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rocks_Sharp_l_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rocks_Sharp_m_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Sharp_Rocks/Rocks_Sharp_m_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Square_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Square_Rocks/Rock_Square_crk_m_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/1 Color/Square_Rocks/Rock_Square_crk_m_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Block_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Block_Rocks/Rock_Block_m_2C_03.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Block_Rocks/Rock_Block_m_2C_03.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Crystals.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Crystals/Crystals_l_2C_05.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Crystals/Crystals_l_2C_05.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Crystals/Crystals_l_2C_06.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Crystals/Crystals_l_2C_06.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rock_Round_l_2C_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rock_Round_l_2C_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rock_Round_l_2C_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rock_Round_l_2C_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rock_Round_l_2C_03.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rock_Round_l_2C_03.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rock_Round_l_2C_07.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rock_Round_l_2C_07.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rocks_Round_l_2C_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rocks_Round_l_2C_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rocks_Round_l_2C_03.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Round_Rocks/Rocks_Round_l_2C_03.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_crk_m_2C_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_crk_m_2C_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_crk_m_2C_03.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_crk_m_2C_03.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_03.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_03.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_04.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_04.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_05.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_05.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_08.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_08.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_13.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_13.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_16.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_16.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_03.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_03.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_05.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_05.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_06.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_06.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Square_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Square_Rocks/Rocks_Square_l_2C_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/2 Color/Square_Rocks/Rocks_Square_l_2C_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/Colliders.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/Colliders/Sharp_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/Colliders/Sharp_Rocks/Rock_Sharp_crk_m_02_Collider.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Meshes/Colliders/Sharp_Rocks/Rock_Sharp_crk_m_02_Collider.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_crk_m_01.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_crk_m_01.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_crk_m_05.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_crk_m_05.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_m_04.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_m_04.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_m_05.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_m_05.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_m_06.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_m_06.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_m_15.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Block_m_15.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_m_01.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_m_01.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_m_02.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_m_02.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_m_03.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_m_03.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_m_04.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_m_04.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_s_01.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_s_01.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_s_04.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_s_04.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_s_05.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Block_Rocks/Rock_Blocks_s_05.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Sharp_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Sharp_Rocks/Rock_Sharp_s_06.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Sharp_Rocks/Rock_Sharp_s_06.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Sharp_Rocks/Rocks_Sharp_l_01.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Sharp_Rocks/Rocks_Sharp_l_01.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Sharp_Rocks/Rocks_Sharp_l_02.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/1 Color/Sharp_Rocks/Rocks_Sharp_l_02.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_crk_m_2C_02.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_crk_m_2C_02.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_crk_m_2C_03.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_crk_m_2C_03.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_01.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_01.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_02.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_02.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_03.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_03.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_04.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_04.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_05.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_l_2C_05.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_02.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_02.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_08.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_08.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_13.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_13.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_16.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rock_Sharp_m_2C_16.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_01.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_01.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_02.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_02.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_03.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_03.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_05.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_05.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_06.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Box_Colliders/2 Color/Sharp_Rocks/Rocks_Sharp_l_2C_06.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Mesh_Colliders.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Mesh_Colliders/1 Color.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Mesh_Colliders/1 Color/Sharp_Rocks.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Mesh_Colliders/1 Color/Sharp_Rocks/Rock_Sharp_crk_m_02.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Mesh_Colliders/1 Color/Sharp_Rocks/Rock_Sharp_crk_m_02.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Mesh_Colliders/1 Color/Sharp_Rocks/Rock_Sharp_crk_m_03.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Prefabs/With_Mesh_Colliders/1 Color/Sharp_Rocks/Rock_Sharp_crk_m_03.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Texture.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Texture/Rocks_Texture_Atlas_Moss.png
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Texture/Rocks_Texture_Atlas_Moss.png.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Texture/Rocks_Texture_Atlas_Snow.png
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Rocks/Rock Assets/Texture/Rocks_Texture_Atlas_Snow.png.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Oak_Trees.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Oak_Trees/FBX.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Oak_Trees/FBX/Oak_Tree_l_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Oak_Trees/FBX/Oak_Tree_l_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Oak_Trees/FBX/Oak_Tree_l_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Oak_Trees/FBX/Oak_Tree_l_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Oak_Trees/FBX/Oak_Tree_m_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Oak_Trees/FBX/Oak_Tree_m_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Pine_Trees.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Pine_Trees/TwoSided.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Pine_Trees/TwoSided/FBX.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Pine_Trees/TwoSided/FBX/Pine_Tree_l_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Pine_Trees/TwoSided/FBX/Pine_Tree_l_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Pine_Trees/TwoSided/FBX/Pine_Tree_l_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Pine_Trees/TwoSided/FBX/Pine_Tree_l_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Simple_Trees.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Simple_Trees/FBX.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Simple_Trees/FBX/Simple_Tree_m_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees/No_Bottoms/Simple_Trees/FBX/Simple_Tree_m_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Fir_Trees.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Fir_Trees/TwoSided.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Fir_Trees/TwoSided/Fir_Tree_m_Snow_08.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Fir_Trees/TwoSided/Fir_Tree_m_Snow_08.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Fir_Trees/TwoSided/Fir_Tree_s_Snow_06.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Fir_Trees/TwoSided/Fir_Tree_s_Snow_06.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Oak_Trees.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Oak_Trees/Oak_Tree_l_Snow_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Oak_Trees/Oak_Tree_l_Snow_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Pine_Trees.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Pine_Trees/TwoSided.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Pine_Trees/TwoSided/Pine_Tree_l_Snow_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Pine_Trees/TwoSided/Pine_Tree_l_Snow_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Pine_Trees/TwoSided/Pine_Tree_l_Snow_02.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Pine_Trees/TwoSided/Pine_Tree_l_Snow_02.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Thuja_Trees.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Thuja_Trees/Thuja_BushTree_m_Snow_01.fbx
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Meshes/Trees_Snow/No_Bottoms/Thuja_Trees/Thuja_BushTree_m_Snow_01.fbx.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Textures.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Textures/Trees_Texture_Atlas.png
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Textures/Trees_Texture_Atlas.png.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Textures/Trees_Texture_Atlas_Autumn.png
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Trees/Tree Assets/Textures/Trees_Texture_Atlas_Autumn.png.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Vegetation.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Vegetation/Vegetation Assets.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Vegetation/Vegetation Assets/Textures.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Vegetation/Vegetation Assets/Textures/Vegetation_Texture_Atlas.png
+!/Assets/LMHPOLY/Low Poly Nature Bundle/Vegetation/Vegetation Assets/Textures/Vegetation_Texture_Atlas.png.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/_Bonus Assets.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/_Bonus Assets/Materials.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/_Bonus Assets/Materials/Snow.mat
+!/Assets/LMHPOLY/Low Poly Nature Bundle/_Bonus Assets/Materials/Snow.mat.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/_Bonus Assets/Prefabs.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/_Bonus Assets/Prefabs/VFX.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/_Bonus Assets/Prefabs/VFX/Blizzard.prefab
+!/Assets/LMHPOLY/Low Poly Nature Bundle/_Bonus Assets/Prefabs/VFX/Blizzard.prefab.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/_Bonus Assets/Scripts.meta
+!/Assets/LMHPOLY/Low Poly Nature Bundle/_Bonus Assets/Scripts/CameraControl.cs
+!/Assets/LMHPOLY/Low Poly Nature Bundle/_Bonus Assets/Scripts/CameraControl.cs.meta
+# Local Pi runtime state
+.atl/

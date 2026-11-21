@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee6925fa72386c441b55e1eff6968bf3, type: 3}
+  m_Name: CarDefinition
+  m_EditorClassIdentifier: 
+  bodySize: {x: 1.6, y: 0.7, z: 3}
+  mass: 1100
+  driveForce: 29000
+  maxForwardSpeed: 26
+  maxReverseSpeed: 6
+  brakeDeceleration: 25
+  reverseEngageSpeed: 1
+  coastDrag: 0.3
+  maxSteerAngleDegrees: 30
+  highSpeedSteerAngleDegrees: 9
+  steeringSmoothing: 10
+  maxYawRateDegrees: 90
+  yawAssist: 0.5
+  steeringDeadZone: 0.12
+  frontGrip: 0.9
+  rearGrip: 0.65
+  rearDriftGrip: 0.2
+  maxLateralForce: 20000
+  suspensionRestLength: 0.18
+  suspensionSpring: 100000
+  suspensionDamper: 6000
+  maxSuspensionForce: 60000
+  antiRoll: 30000
+  downforceCoefficient: 8
+  airControlTorque: 300
+  uprightTorque: 23000
+  angularDamping: 2.5
+  airAngularDamping: 0.2
+  maxAngularVelocity: 8
+  nitroDuration: 1.5
+  nitroAccelerationMultiplier: 1.5
+  nitroTopSpeedMultiplier: 1.25
+  nitroCooldown: 6
+  ramLiftFactor: 0.5
+  ramLiftThreshold: 5
+  ramLiftMax: 10
+  ramLiftRollGain: 1.2
+  ramLiftPitchShare: 0.5
+  ramLiftMaxSpin: 8

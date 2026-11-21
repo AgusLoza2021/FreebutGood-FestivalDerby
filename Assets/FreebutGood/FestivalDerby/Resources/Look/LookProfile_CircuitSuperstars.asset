@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734efaba4b1b4147abfad0f7df346878, type: 3}
+  m_Name: LookProfile_CircuitSuperstars
+  m_EditorClassIdentifier: 
+  LookProfileEnabled: 1
+  CameraOffset: {x: -29.1, y: 24.2, z: -16}
+  CameraLookHeight: 2
+  CameraFov: 30
+  CameraFollowSharpness: 6
+  LookAheadMetresPerSpeed: 0.08
+  LookAheadMaxMetres: 1.8
+  LookAheadSharpness: 5
+  SpeedFovWidenDegrees: 2
+  SpeedFovAtMetresPerSecond: 26
+  SpeedFovSharpness: 1.6
+  SunColor: {r: 1, g: 0.87, b: 0.68, a: 1}
+  SunIntensity: 1.15
+  SunEulerAngles: {x: 52, y: 36, z: 0}
+  SunShadowStrength: 0.45
+  AmbientTrilight: 1
+  AmbientSky: {r: 0.5, g: 0.65, b: 0.82, a: 1}
+  AmbientEquator: {r: 0.44, g: 0.54, b: 0.62, a: 1}
+  AmbientGround: {r: 0.3, g: 0.38, b: 0.24, a: 1}
+  CameraBackground: {r: 0.62, g: 0.76, b: 0.9, a: 1}
+  PaletteOverrideEnabled: 1
+  FlatAsphaltTexture: 1
+  AsphaltColor: {r: 0.42, g: 0.43, b: 0.45, a: 1}
+  GroundColor: {r: 0.38, g: 0.56, b: 0.27, a: 1}
+  WallColor: {r: 0.88, g: 0.9, b: 0.92, a: 1}
+  KerbColor: {r: 0.92, g: 0.28, b: 0.24, a: 1}
+  GroundFillEnabled: 1
+  GroundFillMargin: 40
+  GroundFillDepth: 0.06

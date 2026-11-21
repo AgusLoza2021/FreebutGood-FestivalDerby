@@ -1,0 +1,21 @@
+{
+    "name": "FestivalDerby.World.Editor",
+    "rootNamespace": "FestivalDerby.World.Editor",
+    "references": [
+        "FestivalDerby.World",
+        "FestivalDerby.World.Core",
+        "Unity.Splines",
+        "Unity.Mathematics"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
