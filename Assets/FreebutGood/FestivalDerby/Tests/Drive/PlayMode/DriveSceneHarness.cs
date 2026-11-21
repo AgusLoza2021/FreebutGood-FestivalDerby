@@ -12,7 +12,7 @@ namespace FestivalDerby.Drive.Tests
     /// </summary>
     internal sealed class DriveSceneHarness
     {
-        public const string SceneName = "Drive";
+        public const string SceneName = "Gameplay";
         private const float BuildTimeoutSeconds = 10f;
 
         private readonly int _botCount;
