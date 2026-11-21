@@ -187,8 +187,7 @@ namespace FestivalDerby.Match
             if (_finishedFor < EndTapDelay)
                 return;
 
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)
-                || Input.touchCount > 0)
+            if (MatchUi.RestartRequested())
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 

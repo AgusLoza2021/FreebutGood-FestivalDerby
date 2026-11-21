@@ -16,6 +16,11 @@ namespace FestivalDerby.Drive
         [Tooltip("Take the mode from the main menu's choice when one was made. Off = always use the mode above.")]
         [SerializeField] private bool _useMenuSelection = true;
 
+        [Header("Laps")]
+        [Tooltip("Laps to win a laps race, unless the main menu chose another number.")]
+        [Range(1, 10)]
+        [SerializeField] private int _laps = 3;
+
         [Header("Truck chase")]
         [Tooltip("Seconds a car must stay on the truck bed, without leaving it, to win.")]
         [Min(0.5f)]
@@ -48,6 +53,11 @@ namespace FestivalDerby.Drive
             get { return _useMenuSelection; }
         }
 
+        public int Laps
+        {
+            get { return _laps; }
+        }
+
         public float BoardSeconds
         {
             get { return _boardSeconds; }
@@ -75,6 +85,7 @@ namespace FestivalDerby.Drive
 
         private void OnValidate()
         {
+            _laps = Mathf.Clamp(_laps, 1, 10);
             _boardSeconds = Mathf.Max(0.5f, _boardSeconds);
             _eliminationSeconds = Mathf.Max(2f, _eliminationSeconds);
             _startDelay = Mathf.Max(0f, _startDelay);

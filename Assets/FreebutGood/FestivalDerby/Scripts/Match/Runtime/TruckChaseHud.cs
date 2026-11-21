@@ -136,50 +136,14 @@ namespace FestivalDerby.Match
 
         private void BuildCanvas(Transform parent)
         {
-            var canvasObject = new GameObject("TruckChaseHud", typeof(Canvas), typeof(CanvasScaler));
-            canvasObject.transform.SetParent(parent, false);
-            _canvas = canvasObject.GetComponent<Canvas>();
-            _canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            _canvas.sortingOrder = 90;
+            _canvas = MatchUi.CreateCanvas(parent, "TruckChaseHud");
 
-            var scaler = canvasObject.GetComponent<CanvasScaler>();
-            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1080f, 1920f);
-            scaler.matchWidthOrHeight = 0.5f;
-
-            _status = Label("Status", 54, TextAnchor.UpperCenter, new Vector2(0.5f, 1f), new Vector2(0f, -70f), new Vector2(1000f, 90f));
-            _hint = Label("Hint", 42, TextAnchor.UpperCenter, new Vector2(0.5f, 1f), new Vector2(0f, -170f), new Vector2(1000f, 120f));
-            _banner = Label("Banner", 120, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0f, 120f), new Vector2(1000f, 200f));
-            _tap = Label("Tap", 48, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0f, -40f), new Vector2(1000f, 90f));
+            _status = MatchUi.CreateLabel(_canvas, "Status", 54, TextAnchor.UpperCenter, new Vector2(0.5f, 1f), new Vector2(0f, -70f), new Vector2(1000f, 90f));
+            _hint = MatchUi.CreateLabel(_canvas, "Hint", 42, TextAnchor.UpperCenter, new Vector2(0.5f, 1f), new Vector2(0f, -170f), new Vector2(1000f, 120f));
+            _banner = MatchUi.CreateLabel(_canvas, "Banner", 120, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0f, 120f), new Vector2(1000f, 200f));
+            _tap = MatchUi.CreateLabel(_canvas, "Tap", 48, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0f, -40f), new Vector2(1000f, 90f));
             _banner.gameObject.SetActive(false);
             _tap.gameObject.SetActive(false);
-        }
-
-        private Text Label(string name, int size, TextAnchor anchor, Vector2 anchorPoint, Vector2 position, Vector2 extent)
-        {
-            var go = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(Shadow));
-            go.transform.SetParent(_canvas.transform, false);
-
-            var rect = go.GetComponent<RectTransform>();
-            rect.anchorMin = anchorPoint;
-            rect.anchorMax = anchorPoint;
-            rect.pivot = anchorPoint;
-            rect.anchoredPosition = position;
-            rect.sizeDelta = extent;
-
-            var text = go.GetComponent<Text>();
-            text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            text.fontSize = size;
-            text.fontStyle = FontStyle.Bold;
-            text.alignment = anchor;
-            text.color = Color.white;
-            text.horizontalOverflow = HorizontalWrapMode.Wrap;
-            text.raycastTarget = false;
-
-            var shadow = go.GetComponent<Shadow>();
-            shadow.effectColor = new Color(0f, 0f, 0f, 0.8f);
-            shadow.effectDistance = new Vector2(3f, -3f);
-            return text;
         }
     }
 }
