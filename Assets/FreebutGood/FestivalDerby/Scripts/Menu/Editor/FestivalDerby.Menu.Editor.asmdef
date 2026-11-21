@@ -1,0 +1,24 @@
+{
+    "name": "FestivalDerby.Menu.Editor",
+    "rootNamespace": "FestivalDerby.Menu.Editor",
+    "references": [
+        "FestivalDerby.Menu",
+        "FestivalDerby.Driving.Handling",
+        "FestivalDerby.Driving.Rules",
+        "FestivalDerby.Driving.Runtime",
+        "FestivalDerby.World",
+        "FestivalDerby.World.Core",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
