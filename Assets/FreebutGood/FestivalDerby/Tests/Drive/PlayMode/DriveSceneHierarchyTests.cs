@@ -41,6 +41,8 @@ namespace FestivalDerby.Drive.Tests
             AssertConfig(config, "BotsConfig", typeof(BotsConfig));
             AssertConfig(drive, "GamemodeConfig", typeof(MatchConfig));
 
+            Assert.IsNotNull(_scene.Bootstrap.Pause, "Gameplay must offer a pause menu with a way back to the main menu.");
+
             Transform runtime = drive.Find("Runtime");
             Assert.IsNotNull(runtime, "Drive must have a Runtime child.");
             Assert.AreSame(runtime, _scene.Bootstrap.RuntimeRoot, "Spawned objects must go under Runtime.");

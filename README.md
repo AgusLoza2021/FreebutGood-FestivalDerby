@@ -37,6 +37,7 @@ items in the menu bar.
 | Nitro | Left Shift | NITRO |
 | Reverse | Left Ctrl | pull the stick back |
 | Back on the track | R | RESET |
+| Pause, restart or back to the main menu | Esc (Android: Back) | II |
 
 A car that is stuck, flipped or fallen off the world is put back on the track by itself.
 

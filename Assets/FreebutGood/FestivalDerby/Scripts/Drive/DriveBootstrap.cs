@@ -25,6 +25,9 @@ namespace FestivalDerby.Drive
     {
         private const int TargetFrameRate = 60;
 
+        // Must match the menu scene's name in the build settings.
+        private const string MainMenuScene = "MainMenu";
+
         [Header("Config objects (children of Config)")]
         [SerializeField] private CarConfig _carConfig;
         [SerializeField] private ControlsConfig _controlsConfig;
@@ -48,6 +51,7 @@ namespace FestivalDerby.Drive
         private MobileDriveControls _controls;
         private KeyboardSteer _keyboard;
         private TouchHud _hud;
+        private PauseMenu _pause;
         private LookApplier _look;
         private TracksideDresser _dresser;
         private PlayerRespawn _respawn;
@@ -71,6 +75,9 @@ namespace FestivalDerby.Drive
         public Rigidbody CarBody => _car != null ? _car.Body : null;
         public Camera Camera => _camera;
         public MobileDriveControls Controls => _controls;
+
+        /// <summary>The in-game pause button and its Resume / Restart / Main Menu panel.</summary>
+        public PauseMenu Pause => _pause;
         public Transform RuntimeRoot => _runtime;
 
         /// <summary>AI cars spawned for this run (0 before the build).</summary>
@@ -261,6 +268,9 @@ namespace FestivalDerby.Drive
                 _keyboard = host.AddComponent<KeyboardSteer>();
             if (touch)
                 _hud = TouchHud.Build(_runtime);
+
+            // The way back to the main menu, on every platform, touch or not.
+            _pause = PauseMenu.Build(_runtime, MainMenuScene);
 
             // Touch first, keyboard second: whichever is actually being used drives the car.
             _controls.Bind(Driver, new SteerRouter(_hud != null ? _hud.Stick : null, _keyboard));

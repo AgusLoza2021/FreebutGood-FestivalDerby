@@ -19,6 +19,7 @@ Assumptions (not asked, all tunable in a config, not in code): elimination inter
 - [x] T3 (S1) (brain + 61 tests, Unity glue compiles; not exercised in Unity) Bot boarding: bots catch up with the truck tail, climb the ramp, hold the bed. Route: inline.
 - [x] T4 (S1-S4) (compiles; not exercised in Unity; Gameplay scene needs a MatchConfig or menu mode id "TruckChase") Match controller wired in DriveBootstrap + HUD (countdown, board timer, win/lose). Route: inline.
 - [x] T5 (S5) (compiles + 72 pure tests; not exercised in Unity; menu option "TruckChase" added to the builder, menu scene must be rebuilt) Laps mode on the same match seam + menu mode ids. Route: inline.
+- [x] T6 Pause button in gameplay (Resume / Restart / Main Menu, Esc and Android Back). User request: "el modo play no tiene un boton para volver al main menu ,tipo setttings." Route: inline.
 
 ## Log
 L1 (2026-11-21) -Usando thoughtline vamos a crear la ultima mecanica del juego y mas importante.
