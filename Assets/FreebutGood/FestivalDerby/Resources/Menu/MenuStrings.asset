@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3796cdb90e7f54e8a47729139691e6, type: 3}
+  m_Name: MenuStrings
+  m_EditorClassIdentifier: 
+  _entries:
+  - Key: menu.title
+    English: Festival Derby
+    Spanish: Festival Derby
+  - Key: menu.play
+    English: PLAY
+    Spanish: JUGAR
+  - Key: menu.loading
+    English: Loading...
+    Spanish: Cargando...
+  - Key: menu.settings
+    English: Settings
+    Spanish: "Configuraci\xF3n"
+  - Key: menu.close
+    English: Close
+    Spanish: Cerrar
+  - Key: menu.quit
+    English: Quit
+    Spanish: Salir
+  - Key: menu.locked
+    English: Locked
+    Spanish: Bloqueado
+  - Key: menu.mode.title
+    English: Game mode
+    Spanish: Modo de juego
+  - Key: mode.race
+    English: Race
+    Spanish: Carrera
+  - Key: mode.race.desc
+    English: Race against bots over several laps.
+    Spanish: Compite contra bots durante varias vueltas.
+  - Key: mode.freedrive
+    English: Free Drive
+    Spanish: "Conducci\xF3n libre"
+  - Key: mode.freedrive.desc
+    English: Explore the circuit with no pressure.
+    Spanish: "Recorre el circuito sin presi\xF3n."
+  - Key: mode.timetrial
+    English: Time Trial
+    Spanish: Contrarreloj
+  - Key: mode.timetrial.desc
+    English: Beat your best lap.
+    Spanish: Supera tu mejor vuelta.
+  - Key: menu.garage
+    English: Garage
+    Spanish: Garaje
+  - Key: menu.setup.map
+    English: Map
+    Spanish: Mapa
+  - Key: menu.setup.laps
+    English: Laps
+    Spanish: Vueltas
+  - Key: menu.setup.bots
+    English: Bots
+    Spanish: Bots
+  - Key: menu.laps.count
+    English: Number of laps
+    Spanish: "N\xFAmero de vueltas"
+  - Key: menu.bots.count
+    English: Number of bots
+    Spanish: "N\xFAmero de bots"
+  - Key: menu.bots.level
+    English: Difficulty
+    Spanish: Dificultad
+  - Key: bot.easy
+    English: Easy
+    Spanish: "F\xE1cil"
+  - Key: bot.medium
+    English: Medium
+    Spanish: Media
+  - Key: bot.hard
+    English: Hard
+    Spanish: "Dif\xEDcil"
+  - Key: menu.summary
+    English: "{0} \xB7 {1} laps \xB7 {2} bots"
+    Spanish: "{0} \xB7 {1} vueltas \xB7 {2} bots"
+  - Key: menu.settings.volume
+    English: Volume
+    Spanish: Volumen
+  - Key: menu.settings.language
+    English: Language
+    Spanish: Idioma
+  - Key: lang.en
+    English: English
+    Spanish: English
+  - Key: lang.es
+    English: "Espa\xF1ol"
+    Spanish: "Espa\xF1ol"
+  - Key: map.BigOval
+    English: Big Oval
+    Spanish: Big Oval
+  - Key: map.FestivalCircuit
+    English: Festival Circuit
+    Spanish: Festival Circuit
+  - Key: car.ToySedan
+    English: Toy Sedan
+    Spanish: Toy Sedan
+  - Key: car.ToySedanSports
+    English: Toy Sedan Sports
+    Spanish: Toy Sedan Sports
+  - Key: car.ToyHatchbackSports
+    English: Toy Hatchback Sports
+    Spanish: Toy Hatchback Sports
+  - Key: car.ToySuv
+    English: Toy Suv
+    Spanish: Toy Suv
+  - Key: car.ToySuvLuxury
+    English: Toy Suv Luxury
+    Spanish: Toy Suv Luxury
+  - Key: car.ToyVan
+    English: Toy Van
+    Spanish: Toy Van
+  - Key: car.ToyDelivery
+    English: Toy Delivery
+    Spanish: Toy Delivery
+  - Key: car.ToyTaxi
+    English: Toy Taxi
+    Spanish: Toy Taxi
+  - Key: car.ToyPolice
+    English: Toy Police
+    Spanish: Toy Police
+  - Key: car.ToyTruck
+    English: Toy Truck
+    Spanish: Toy Truck
+  - Key: car.ToyRace
+    English: Toy Race
+    Spanish: Toy Race
+  - Key: car.ToyAmbulance
+    English: Toy Ambulance
+    Spanish: Toy Ambulance
+  - Key: car.KitDragRacer
+    English: Kit Drag Racer
+    Spanish: Kit Drag Racer
+  - Key: car.KitMonsterTruck
+    English: Kit Monster Truck
+    Spanish: Kit Monster Truck
+  - Key: car.KitRacer
+    English: Kit Racer
+    Spanish: Kit Racer
+  - Key: car.KitRacerLow
+    English: Kit Racer Low
+    Spanish: Kit Racer Low
+  - Key: car.KitSpeedster
+    English: Kit Speedster
+    Spanish: Kit Speedster
+  - Key: car.KitSuv
+    English: Kit Suv
+    Spanish: Kit Suv
+  - Key: car.KitTruck
+    English: Kit Truck
+    Spanish: Kit Truck
+  - Key: car.KitVintageRacer
+    English: Kit Vintage Racer
+    Spanish: Kit Vintage Racer
+  - Key: mode.truck
+    English: Truck Chase
+    Spanish: "Persecuci\xF3n del cami\xF3n"
+  - Key: mode.truck.desc
+    English: Be the first to ride the truck for 3 seconds. The last car is knocked
+      out.
+    Spanish: "S\xE9 el primero en subirte al cami\xF3n 3 segundos. El \xFAltimo auto
+      queda eliminado."
