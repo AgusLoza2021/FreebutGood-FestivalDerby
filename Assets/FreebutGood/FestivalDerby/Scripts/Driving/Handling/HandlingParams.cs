@@ -580,6 +580,36 @@ namespace FestivalDerby.Driving.Handling
         }
 
         /// <summary>
+        /// A copy of this handling with the top speed and the full-throttle acceleration multiplied. A
+        /// scale of 0 (or negative, or not finite) keeps that value, the same inert-by-default rule as
+        /// <see cref="WithSteeringOverrides"/>. The cornering budget is left alone on purpose: a faster car
+        /// asks the same tyres for the same grip, so it takes wider arcs at speed rather than a stiffer car.
+        /// </summary>
+        public HandlingParams WithLongitudinalScale(float topSpeedScale, float accelScale)
+        {
+            return Clone(
+                HeadingGain,
+                MaxYawRateRadiansPerSecond,
+                LateralAccelBudgetMetersPerSecondSquared,
+                SteerRateRadiansPerSecond,
+                BrakeRotate,
+                StraightDeadBand,
+                AutoUnstick,
+                CatchUp,
+                IsUsableScale(topSpeedScale) ? TopSpeedMetersPerSecond * topSpeedScale : TopSpeedMetersPerSecond,
+                IsUsableScale(accelScale)
+                    ? AccelMaxMetersPerSecondSquared * accelScale
+                    : AccelMaxMetersPerSecondSquared,
+                ThrottleCurve,
+                EngineBrakeMetersPerSecondSquared);
+        }
+
+        private static bool IsUsableScale(float scale)
+        {
+            return scale > 0f && !float.IsNaN(scale) && !float.IsInfinity(scale);
+        }
+
+        /// <summary>
         /// A copy of this handling with the FP0 brake-to-rotate tuning replaced. Pass
         /// <see cref="BrakeRotateTuning.Off"/> to ship the feature inert.
         /// </summary>

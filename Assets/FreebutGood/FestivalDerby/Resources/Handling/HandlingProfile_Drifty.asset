@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: HandlingProfile_Drifty
   m_EditorClassIdentifier: 
   Preset: 2
+  TopSpeedScale: 1.3
+  AccelScale: 1.3

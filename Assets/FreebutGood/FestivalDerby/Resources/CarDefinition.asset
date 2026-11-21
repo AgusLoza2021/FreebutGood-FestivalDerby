@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodySize: {x: 1.6, y: 0.7, z: 3}
   mass: 1100
-  driveForce: 29000
-  maxForwardSpeed: 26
+  driveForce: 37700
+  maxForwardSpeed: 33.8
   maxReverseSpeed: 6
   brakeDeceleration: 25
   reverseEngageSpeed: 1

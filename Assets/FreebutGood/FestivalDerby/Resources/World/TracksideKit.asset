@@ -31,14 +31,14 @@ MonoBehaviour:
     TyreWallOffset: 1.5
     TyreWallSpacing: 2.5
     TyreWallWidth: 0.6
-    FenceSpacing: 10
+    FenceSpacing: 11
     FenceWidth: 0.3
-    FarBandMinOffset: 4
-    FarBandMaxOffset: 22
-    FarBandSpacing: 6
+    FarBandMinOffset: 6
+    FarBandMaxOffset: 30
+    FarBandSpacing: 7
     FarBandJitter: 3
-    FarBandMargin: 1
-    FarBandRadius: 3
+    FarBandMargin: 4
+    FarBandRadius: 4.5
     FlagZoneDistance: 14
     FlagSpacing: 4
     CornerPropChance: 0.5
@@ -53,6 +53,7 @@ MonoBehaviour:
     Variants:
     - {fileID: 4533762392551512984, guid: e9b8accac1aab7e46bcc455ed7adf73e, type: 3}
     - {fileID: 6349174419517487426, guid: e52757151361e054a83dff2d46c78760, type: 3}
+    - {fileID: 4533762392551512984, guid: 50c16f7623dc38444af8dd515943c525, type: 3}
     Scale: 0.9
     YawOffsetDegrees: 0
   - Kind: 6

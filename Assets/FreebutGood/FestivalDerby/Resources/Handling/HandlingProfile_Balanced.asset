@@ -17,3 +17,5 @@ MonoBehaviour:
   MaxYawRateRadiansPerSecondOverride: 0
   LateralAccelBudgetMetersPerSecondSquaredOverride: 30
   SteerRateRadiansPerSecondOverride: 0
+  TopSpeedScale: 1.3
+  AccelScale: 1.3

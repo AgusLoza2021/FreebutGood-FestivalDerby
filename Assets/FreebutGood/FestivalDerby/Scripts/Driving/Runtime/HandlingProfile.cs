@@ -54,6 +54,13 @@ namespace FestivalDerby.Driving.Runtime
                  "0 keeps the preset value.")]
         public float SteerRateRadiansPerSecondOverride;
 
+        [Tooltip("Longitudinal: multiplier on the preset's top speed (1.3 = 30% faster). 0 keeps the preset value. " +
+                 "The bots drive this same profile, so it speeds them up too.")]
+        public float TopSpeedScale;
+
+        [Tooltip("Longitudinal: multiplier on the preset's full-throttle acceleration. 0 keeps the preset value.")]
+        public float AccelScale;
+
         /// <summary>The preset this asset names.</summary>
         public HandlingParams Params
         {
@@ -82,10 +89,11 @@ namespace FestivalDerby.Driving.Runtime
             return overrides == null
                 ? baseParams
                 : baseParams.WithSteeringOverrides(
-                    overrides.HeadingGainOverride,
-                    overrides.MaxYawRateRadiansPerSecondOverride,
-                    overrides.LateralAccelBudgetMetersPerSecondSquaredOverride,
-                    overrides.SteerRateRadiansPerSecondOverride);
+                        overrides.HeadingGainOverride,
+                        overrides.MaxYawRateRadiansPerSecondOverride,
+                        overrides.LateralAccelBudgetMetersPerSecondSquaredOverride,
+                        overrides.SteerRateRadiansPerSecondOverride)
+                    .WithLongitudinalScale(overrides.TopSpeedScale, overrides.AccelScale);
         }
 
         public static HandlingParams ResolvePreset(HandlingPreset preset)

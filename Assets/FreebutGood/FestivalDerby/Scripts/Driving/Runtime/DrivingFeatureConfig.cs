@@ -124,6 +124,46 @@ namespace FestivalDerby.Driving.Runtime
         [Tooltip("Exponential filter time constant, in seconds, for the accelerations the juice reads.")]
         public float BodyFilterTau = DefaultBodyFilterTau;
 
+        // Drift juice: a cosmetic yaw of the visual model past the physics heading, into the turn. It
+        // never touches the Rigidbody or the sim. Born off like every new feature; the demo asset turns
+        // it on. Resolve* treats an out-of-range value as unset, so a stale asset keeps the defaults.
+        private const float DefaultDriftSensitivity = 55f;
+        private const float DefaultDriftTailSwing = 1.1f;
+        private const float DefaultDriftFrontPivotZ = 1.3f;
+        private const float DefaultDriftRearPivotZ = -1.3f;
+        private const float DefaultDriftSpringHz = 2.5f;
+        private const float DefaultDriftDamping = 0.45f;
+        private const float DefaultDriftMinSpeed = 5f;
+        private const float DefaultDriftFullYawRate = 0.8f;
+        // The chase camera has to lag the car's heading while it drifts, or the car always reads as
+        // pointing straight up the screen and the tail swing is invisible.
+        private const float DefaultDriftCameraYawSharpness = 2.5f;
+        private const float DefaultDriftCameraYawMaxDegPerSec = 70f;
+
+        [Tooltip("Drift: the front pivot holds the car's line and the rear pivot is thrown out of the turn with a delay, so the tail goes. Off leaves the body juice as it was.")]
+        public bool DriftJuiceEnabled = false;
+        [Tooltip("0-100. How far the tail is thrown for the same amount of steering. 0 never moves it, 100 is the full Tail Swing.")]
+        [Range(0f, 100f)]
+        public float DriftSensitivity = DefaultDriftSensitivity;
+        [Tooltip("Furthest the rear pivot is thrown sideways, in metres.")]
+        public float DriftTailSwingMetres = DefaultDriftTailSwing;
+        [Tooltip("Front pivot, metres along the car (positive is the nose). It never moves.")]
+        public float DriftFrontPivotZ = DefaultDriftFrontPivotZ;
+        [Tooltip("Rear pivot, metres along the car (negative is the tail).")]
+        public float DriftRearPivotZ = DefaultDriftRearPivotZ;
+        [Tooltip("How fast the rear pivot reacts, in Hz. Lower is a longer delay before the tail goes.")]
+        public float DriftSpringHz = DefaultDriftSpringHz;
+        [Tooltip("Spring damping ratio. Below 1 the tail flicks past its target and settles; 1 is a plain slide.")]
+        public float DriftDamping = DefaultDriftDamping;
+        [Tooltip("Forward speed (m/s) at which the drift reaches full strength; slower fades it out.")]
+        public float DriftMinSpeed = DefaultDriftMinSpeed;
+        [Tooltip("Yaw rate (rad/s) that counts as the player turning all the way.")]
+        public float DriftFullYawRate = DefaultDriftFullYawRate;
+        [Tooltip("While drift is on, how fast the chase camera follows the car's heading. Lower is a lazier camera, so the car swings in frame.")]
+        public float DriftCameraYawSharpness = DefaultDriftCameraYawSharpness;
+        [Tooltip("While drift is on, the most the chase camera turns per second, in degrees.")]
+        public float DriftCameraYawMaxDegPerSec = DefaultDriftCameraYawMaxDegPerSec;
+
         // Terrain grip from the baked surface under each car. On in the demo: the surface shader and
         // the grip read land together, so a map with a dirt span actually drives differently on it.
         // Off restores the pre-surface handling byte for byte, which is what a rollback wants.
@@ -327,6 +367,46 @@ namespace FestivalDerby.Driving.Runtime
         {
             return ResolveFeel(config == null ? float.NaN : config.BodyFilterTau,
                 MinFilterTau, MaxFilterTau, DefaultBodyFilterTau);
+        }
+
+        /// <summary>
+        /// The drift tuning a run uses. A null config or a switch left off resolves to the disabled
+        /// default; each number outside its range falls back to the shipped value.
+        /// </summary>
+        public static CarDriftJuiceSettings ResolveDriftSettings(DrivingFeatureConfig config)
+        {
+            if (config == null || !config.DriftJuiceEnabled)
+                return default;
+
+            return new CarDriftJuiceSettings(
+                true,
+                ResolveFeel(config.DriftSensitivity, 0f, 100f, DefaultDriftSensitivity),
+                ResolveFeel(config.DriftTailSwingMetres, 0.01f, 3f, DefaultDriftTailSwing),
+                ResolveFeel(config.DriftFrontPivotZ, -5f, 5f, DefaultDriftFrontPivotZ),
+                ResolveFeel(config.DriftRearPivotZ, -5f, 5f, DefaultDriftRearPivotZ),
+                ResolveFeel(config.DriftSpringHz, 0.5f, 20f, DefaultDriftSpringHz),
+                ResolveFeel(config.DriftDamping, 0.1f, 2f, DefaultDriftDamping),
+                ResolveFeel(config.DriftMinSpeed, 0.1f, 50f, DefaultDriftMinSpeed),
+                ResolveFeel(config.DriftFullYawRate, 0.05f, 5f, DefaultDriftFullYawRate));
+        }
+
+        /// <summary>
+        /// The chase camera's heading-follow sharpness: the look's own value while drift is off, the
+        /// lazier drift value while it is on, so the car can swing in frame instead of being re-centred.
+        /// </summary>
+        public static float ResolveDriftCameraYawSharpness(DrivingFeatureConfig config, float lookValue)
+        {
+            return config == null || !config.DriftJuiceEnabled
+                ? lookValue
+                : ResolveFeel(config.DriftCameraYawSharpness, 0.1f, 20f, DefaultDriftCameraYawSharpness);
+        }
+
+        /// <summary>The chase camera's turn-rate cap: the look's value while drift is off.</summary>
+        public static float ResolveDriftCameraYawMaxDegPerSec(DrivingFeatureConfig config, float lookValue)
+        {
+            return config == null || !config.DriftJuiceEnabled
+                ? lookValue
+                : ResolveFeel(config.DriftCameraYawMaxDegPerSec, 5f, 720f, DefaultDriftCameraYawMaxDegPerSec);
         }
 
         private static float ResolveFeel(float value, float min, float max, float fallback)

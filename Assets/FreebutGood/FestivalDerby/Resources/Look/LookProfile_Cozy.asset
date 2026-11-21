@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: LookProfile_Cozy
   m_EditorClassIdentifier: 
   LookProfileEnabled: 1
-  CameraOffset: {x: -14.1, y: 4.24, z: 0}
-  CameraLookHeight: 2.06
-  CameraFov: 30
-  CameraFollowSharpness: 6
-  LookAheadMetresPerSpeed: 0.08
-  LookAheadMaxMetres: 1.8
+  CameraOffset: {x: -3, y: 1, z: 0}
+  CameraLookHeight: 1.5
+  CameraFov: 35
+  CameraFollowSharpness: 9
+  LookAheadMetresPerSpeed: 0.09
+  LookAheadMaxMetres: 2
   LookAheadSharpness: 5
-  SpeedFovWidenDegrees: 2
+  SpeedFovWidenDegrees: 1.5
   SpeedFovAtMetresPerSecond: 26
   SpeedFovSharpness: 1.6
   YawMode: 2
-  ChaseOffset: {x: 0, y: 9, z: -14}
+  ChaseOffset: {x: 0, y: 6, z: -18}
   PivotAheadMetres: 6
   TrackLookAheadMetres: 18
-  YawSharpness: 3
+  YawSharpness: 8
   YawMaxDegreesPerSecond: 120
   SunColor: {r: 1, g: 0.86, b: 0.7, a: 1}
   SunIntensity: 1.25

@@ -46,6 +46,8 @@ namespace FestivalDerby.Driving.Runtime
         private Rigidbody _body;
         private LocalCarFixedStepDriver _driver;
         private CarBodyJuiceSettings _settings;
+        // Null while the drift switch is off, so the off path costs one null check.
+        private CarDriftJuice _drift;
 
         private Vector3 _restLocalPosition = Vector3.zero;
         private Quaternion _restLocalRotation = Quaternion.identity;
@@ -71,18 +73,25 @@ namespace FestivalDerby.Driving.Runtime
                 DrivingFeatureConfig.ResolveBodyFilterTau(config));
         }
 
+        /// <summary>The sanitized drift tuning a run uses; the default (switch off) disables the swing.</summary>
+        public static CarDriftJuiceSettings ResolveDriftSettings(DrivingFeatureConfig config)
+        {
+            return DrivingFeatureConfig.ResolveDriftSettings(config);
+        }
+
         /// <summary>
         /// Binds the juice to one pivot under one body. The driver may be null (tests drive
         /// <see cref="Apply"/> directly); without a pivot or body the component no-ops. The pivot's
         /// current local pose is the rest pose OnDisable restores.
         /// </summary>
         public void Bind(Transform pivot, Rigidbody body, LocalCarFixedStepDriver driver,
-            in CarBodyJuiceSettings settings)
+            in CarBodyJuiceSettings settings, CarDriftJuiceSettings drift = default)
         {
             _pivot = pivot;
             _body = body;
             _driver = driver;
             _settings = settings;
+            _drift = drift.Enabled ? new CarDriftJuice(drift) : null;
             if (pivot != null)
             {
                 _restLocalPosition = pivot.localPosition;
@@ -144,12 +153,25 @@ namespace FestivalDerby.Driving.Runtime
                 squash = Mathf.Sin(Mathf.Clamp01(progress) * Mathf.PI);
             }
 
-            _pivot.localPosition = _restLocalPosition;
+            // The drift yaws the whole model around a point on the car's axis, so the position has to
+            // move with it: rotating about P keeps P fixed, which is P - R*P added to the rest pose.
+            Quaternion yaw = Quaternion.identity;
+            Vector3 pivotShift = Vector3.zero;
+            if (_drift != null)
+            {
+                float yawDegrees = _drift.Step(readout.YawRateRadiansPerSecond,
+                    readout.ForwardSpeedMetersPerSecond, dt);
+                yaw = Quaternion.Euler(0f, yawDegrees, 0f);
+                var p = new Vector3(0f, 0f, _drift.PivotZ);
+                pivotShift = p - yaw * p;
+            }
+
+            _pivot.localPosition = _restLocalPosition + pivotShift;
             _pivot.localScale = new Vector3(
                 _restLocalScale.x,
                 _restLocalScale.y * (1f - _settings.SquashScale * squash),
                 _restLocalScale.z);
-            _pivot.localRotation = _restLocalRotation * Quaternion.Euler(pitchDegrees, 0f, rollDegrees);
+            _pivot.localRotation = yaw * _restLocalRotation * Quaternion.Euler(pitchDegrees, 0f, rollDegrees);
         }
 
         private void LateUpdate()
@@ -172,6 +194,7 @@ namespace FestivalDerby.Driving.Runtime
 
             // The transient state goes with it: a re-enable starts from rest, not from a stale filter
             // or a half-finished squash.
+            _drift?.Reset();
             _lateralFiltered = 0f;
             _longitudinalFiltered = 0f;
             _hasLastForwardSpeed = false;
