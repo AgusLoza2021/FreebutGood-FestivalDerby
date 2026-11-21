@@ -5,13 +5,14 @@ Guide for AI coding agents (and people) working in this repository.
 ## What this is
 
 A Unity 6000.0.81f1 URP project that contains only the car core of Festival Derby: one toy car, one
-baked circuit, a chase camera, a look profile and touch/keyboard controls. See `README.md` for the
+baked circuit, a chase camera, a look profile, touch/keyboard controls, bots, a main menu and two
+match modes (truck chase, laps). See `README.md` for the
 player-facing overview.
 
 ## The one flow
 
-`Assets/FreebutGood/FestivalDerby/Scenes/Drive.unity` → `DriveBootstrap.Start()` → load map → spawn
-car → controls → chase camera → look → trackside dressing → respawn. If a change breaks that flow
+`Assets/FreebutGood/FestivalDerby/Scenes/MainMenu.unity` → `Gameplay.unity` → `DriveBootstrap.Start()` → load map → spawn
+car → controls → chase camera → look → trackside dressing → respawn → bots → match mode. If a change breaks that flow
 (the car cannot drive, the camera does not follow), it is a bug even if it compiles. The PlayMode test
 `DriveSceneSmokeTests` checks exactly this.
 
@@ -25,6 +26,9 @@ car → controls → chase camera → look → trackside dressing → respawn. I
 | `FestivalDerby.World` | `Scripts/World` | World.Core |
 | `FestivalDerby.Driving.Runtime` | `Scripts/Driving/Runtime` | Rules, Handling, World, World.Core |
 | `FestivalDerby.Look` | `Scripts/Look` | URP |
+| `FestivalDerby.Bots.Core`, `FestivalDerby.Bots` | `Scripts/Bots` | Rules, World |
+| `FestivalDerby.Match.Core` (engine-free), `FestivalDerby.Match` | `Scripts/Match` | World.Core, Bots, Driving.Runtime |
+| `FestivalDerby.Menu` | `Scripts/Menu` | Bots |
 | `FestivalDerby.Drive` | `Scripts/Drive` | all of the above |
 | `FestivalDerby.World.Editor`, `FestivalDerby.Drive.Editor` | `Editor` folders | Editor only |
 
