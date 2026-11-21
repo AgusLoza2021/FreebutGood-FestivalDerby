@@ -1,0 +1,17 @@
+{
+    "name": "FestivalDerby.Bots.Core",
+    "rootNamespace": "FestivalDerby.Bots",
+    "references": [
+        "FestivalDerby.Driving.Rules",
+        "FestivalDerby.World.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}
